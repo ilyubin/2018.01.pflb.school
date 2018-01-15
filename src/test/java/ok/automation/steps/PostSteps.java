@@ -9,6 +9,15 @@ public class PostSteps implements ISteps {
 
     @Step
     public void open_page() {
+    }
 
+    @Step
+    public void create_text_post(String text) {
+
+    }
+
+    @Step
+    public String last() {
+        return "";
     }
 }

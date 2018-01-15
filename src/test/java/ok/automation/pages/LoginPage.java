@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @DefaultUrl("https://ok.ru")
 public class LoginPage extends PageObject {
 
-    @FindBy(id="field_email")
+    @FindBy(id="")
     private WebElementFacade fieldLogin;
 
-    @FindBy(id="field_password")
+    @FindBy(id="")
     private WebElementFacade fieldPassword;
 
-    @FindBy(css=".js-login-form input[type=submit]")
+    @FindBy(css="")
     private WebElementFacade buttonLogin;
 
     public void fillLoginForm(String login, String password) {

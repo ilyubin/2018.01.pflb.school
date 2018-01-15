@@ -6,7 +6,7 @@ import net.thucydides.core.pages.PageObject;
 
 public class MainPage extends PageObject {
 
-    @FindBy(css=".mctc_name_tx")
+    @FindBy(css="")
     private WebElementFacade userNameInHeader;
 
     public String getUserName() {

@@ -2,11 +2,11 @@ package ok.automation.features.friend;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.FriendSteps;
 import org.junit.Test;
 
-public class FriendStory extends BaseFeatures {
+public class FriendStory extends BaseFeature {
 
     @Steps
     private FriendSteps _friend;

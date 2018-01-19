@@ -1,4 +1,4 @@
-package ok.automation.features;
+package ok.automation.tech.extensions;
 
 import com.github.javafaker.Faker;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 @RunWith(SerenityRunner.class)
-public class BaseFeatures {
+public class BaseFeature {
 
     @Managed
     public WebDriver webdriver;

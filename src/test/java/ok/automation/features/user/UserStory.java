@@ -1,14 +1,14 @@
 package ok.automation.features.user;
 
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.UserSteps;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UserStory extends BaseFeatures {
+public class UserStory extends BaseFeature {
 
     @Steps
     private UserSteps _user;

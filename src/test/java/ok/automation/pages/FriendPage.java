@@ -6,12 +6,9 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
 @DefaultUrl("https://ok.ru")
-public class MainPage extends PageObject {
+public class FriendPage extends PageObject {
 
-    @FindBy(css=".mctc_name_tx")
+    @FindBy(css="")
     private WebElementFacade userNameInHeader;
 
-    public String getUserName() {
-        return userNameInHeader.getText();
-    }
 }

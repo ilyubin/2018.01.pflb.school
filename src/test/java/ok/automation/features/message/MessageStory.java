@@ -1,18 +1,12 @@
 package ok.automation.features.message;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Issue;
-import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
-import ok.automation.steps.AvatarSteps;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
-public class MessageStory extends BaseFeatures {
+public class MessageStory extends BaseFeature {
 
     @Steps
     private GiftSteps _gift;

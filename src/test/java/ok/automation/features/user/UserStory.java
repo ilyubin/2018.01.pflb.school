@@ -24,7 +24,3 @@ public class UserStory extends BaseFeature {
         assertThat(_user.nameInHeader()).isEqualTo("Mark Marken");
     }
 }
-
-//.__promo .tico  все включено
-
-      //  a[hrefattrs*=authorGifts] .tico // авторские

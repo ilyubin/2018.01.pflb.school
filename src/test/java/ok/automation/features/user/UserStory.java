@@ -21,6 +21,10 @@ public class UserStory extends BaseFeature {
     @Test
     public void should_be_able_login_to_ok_ru() {
         _user.loginToOkRu(okLogin, okPass);
-        assertThat(_user.nameInHeader()).isEqualTo(okName);
+        assertThat(_user.nameInHeader()).isEqualTo("Mark Marken");
     }
 }
+
+//.__promo .tico  все включено
+
+      //  a[hrefattrs*=authorGifts] .tico // авторские

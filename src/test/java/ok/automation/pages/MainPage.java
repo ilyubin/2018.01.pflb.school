@@ -5,6 +5,8 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
+import java.util.List;
+
 @DefaultUrl("https://ok.ru")
 public class MainPage extends PageObject {
 
@@ -22,6 +24,9 @@ public class MainPage extends PageObject {
 
     @FindBy(xpath="(//div[@class='feed-list']//div[@class='media-text_cnt'])[1]")
     private WebElementFacade lastPost;
+
+    @FindBy(xpath="//div[@class='feed-list']//div[@class='media-text_cnt']")
+    private List<WebElementFacade> allPosts;
 
     public String getUserName() {
         return userNameInHeader.getText();

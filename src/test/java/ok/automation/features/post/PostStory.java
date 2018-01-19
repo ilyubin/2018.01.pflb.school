@@ -20,7 +20,7 @@ public class PostStory extends BaseFeature {
     @Before
     public void open_login_page() {
         _user.open_login_page();
-        _user.loginToOkRu(okLogin, okPass);
+        _user.loginToOkRu("delice94@mail.ru", "Qweria34");
     }
 
     @Test

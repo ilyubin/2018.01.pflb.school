@@ -14,4 +14,32 @@ public class MainPage extends PageObject {
     public String getUserName() {
         return userNameInHeader.getText();
     }
+
+    @FindBy(css=".input_placeholder")
+    private WebElementFacade buttonNewPost;
+
+    public void clickNewPost() {
+        buttonNewPost.click();
+    }
+
+    @FindBy(css="[data-initial-text-to-modify]")
+    private WebElementFacade fieldPost;
+
+    public void fillPost(String text) {
+        fieldPost.type(text);
+    }
+
+    @FindBy(css="[data-action=\"submit\"]")
+    private WebElementFacade buttonPost;
+
+    public void submitPost() {
+        buttonPost.click();
+    }
+
+    @FindBy(css=".media-text_cnt")
+    private WebElementFacade formPost;
+
+    public String getLastPost() {
+        return formPost.getText();
+    }
 }

@@ -42,4 +42,11 @@ public class MainPage extends PageObject {
     public String getLastPost() {
         return formPost.getText();
     }
+
+    @FindBy(css=".entity-avatar [srcset]")
+    private WebElementFacade buttonAvatar;
+
+    public void clickAvatar() {
+        buttonAvatar.click();
+    }
 }

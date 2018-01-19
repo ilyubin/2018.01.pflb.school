@@ -5,9 +5,12 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-//@DefaultUrl("https://ok.ru")
+@DefaultUrl("https://ok.ru")
 public class FriendPage extends PageObject {
 
+    @FindBy(css="")
+    private WebElementFacade userNameInHeader;
+    
     @FindBy(css="#hook_Block_HeaderTopFriendsInToolbar a")
     private WebElementFacade friendsHeaderButton;
 

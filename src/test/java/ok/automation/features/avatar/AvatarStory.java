@@ -2,11 +2,11 @@ package ok.automation.features.avatar;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.AvatarSteps;
 import org.junit.Test;
 
-public class AvatarStory extends BaseFeatures {
+public class AvatarStory extends BaseFeature {
 
     @Steps
     private AvatarSteps _avatar;

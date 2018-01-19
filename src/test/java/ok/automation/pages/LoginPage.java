@@ -18,7 +18,7 @@ public class LoginPage extends PageObject {
     @FindBy(id="field_password")
     private WebElementFacade fieldPassword;
 
-    @FindBy(css="[data-l$=\"loginButton\"]")
+    @FindBy(css="[data-l$=loginButton]")
     private WebElementFacade buttonLogin;
 
     public void fillLoginForm(String login, String password) {

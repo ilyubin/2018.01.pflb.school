@@ -1,7 +1,7 @@
 package ok.automation.features.post;
 
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.PostSteps;
 import ok.automation.steps.UserSteps;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostStory extends BaseFeatures {
+public class PostStory extends BaseFeature {
 
     @Steps
     private PostSteps _post;
@@ -20,6 +20,7 @@ public class PostStory extends BaseFeatures {
     @Before
     public void open_login_page() {
         _user.open_login_page();
+        _user.loginToOkRu(okLogin, okPass);
     }
 
     @Test
@@ -28,4 +29,4 @@ public class PostStory extends BaseFeatures {
         _post.create_text_post(text);
         assertThat(_post.last()).isEqualTo(text);
     }
-} 
+}

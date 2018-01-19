@@ -2,11 +2,11 @@ package ok.automation.features.gift;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.features.BaseFeatures;
+import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
 import org.junit.Test;
 
-public class GiftStory extends BaseFeatures {
+public class GiftStory extends BaseFeature {
 
     @Steps
     private GiftSteps _gift;

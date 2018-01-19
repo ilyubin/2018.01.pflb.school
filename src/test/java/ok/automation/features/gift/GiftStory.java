@@ -12,14 +12,14 @@ public class GiftStory extends BaseFeature {
     private GiftSteps _gift;
 
     @Test @Pending
-    public void searching_by_keyword_apple_should_display_the_corresponding_article() {
+    public void search_gift() {
     }
 
     @Test @Pending
-    public void searching_by_keyword_banana_should_display_the_corresponding_article() {
+    public void try_to_send_gift() {
     }
 
     @Test @Pending
-    public void searching_by_ambiguious_keyword_should_display_the_disambiguation_page() {
+    public void try_to_create_own_gift() {
     }
 } 

@@ -12,14 +12,14 @@ public class MessageStory extends BaseFeature {
     private GiftSteps _gift;
 
     @Test @Pending
-    public void searching_by_keyword_apple_should_display_the_corresponding_article() {
+    public void send_message_to_friend() {
     }
 
     @Test @Pending
-    public void searching_by_keyword_banana_should_display_the_corresponding_article() {
+    public void edit_message() {
     }
 
     @Test @Pending
-    public void searching_by_ambiguious_keyword_should_display_the_disambiguation_page() {
+    public void delete_message() {
     }
 } 

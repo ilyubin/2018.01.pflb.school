@@ -108,7 +108,6 @@ Only local connections are allowed.
 git version 2.15.1
 ```
 
-
 ## Setup project ###
 
 ### Create folder ###
@@ -143,7 +142,7 @@ Open test file `*Story.java` and just click green triangle
 ```powershell
 > mvn clean verify -Dwebdriver.driver=chrome
 ```
-### Terminal run in Chrome ###
+### Terminal run one test ###
 
 ```powershell
 > mvn clean verify -it.test=PurposeStory#create_purpose
@@ -221,7 +220,7 @@ public class PurposeSteps implements ISteps {
 }
 ```
 
-- in `pages` a set of pages it may be `*ListPage`, `*CreatePage`, `*ImportPopup` etc. Implement all page's methods using selenium/serenity commands
+- in `pages` a set of pages it may be `*Page`, `*Form`, `*Popup` etc. Implement all page's methods using selenium/serenity commands
 
 ## Links ##
 

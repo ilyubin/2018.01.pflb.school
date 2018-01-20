@@ -13,9 +13,11 @@ Open Powershell as administrator.
 
 ### Set execution policy ###
 
-```
+```powershell
 > Set-ExecutionPolicy Unrestricted
+```
 
+```powershell
 > Get-ExecutionPolicy
 Unrestricted
 ```
@@ -28,53 +30,54 @@ https://chocolatey.org/install
 > iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 ```
 
-```
+```powershell
 > choco -v
 0.10.8
 ```
 
 ### Install java ###
 
-```
+```powershell
 > choco install jdk8
 ```
 
-```
+```powershell
 > java -version
 Java version “8.0.152”
 ```
 
 ### Set JAVA_HOME ###
 
-```
+```powershell
 > start SystemPropertiesAdvanced.exe
 ```
+and set in env variables JAVA_HOME.
 
-```
+```powershell
 > $env:JAVA_HOME
 c:/Program Files/Java/jdk-8.0.152
 ```
 
 ### Install intellij idea ###
 
-```
+```powershell
 > choco install intellijidea-community
 ```
 
 ### Install maven ###
 
-```
+```powershell
 > choco install maven
 ```
 
-```
+```powershell
 > mvn -v
 Apache Maven 3.5.2
 ```
 
 ### Install Chrome ###
 
-```
+```powershell
 > choco install googlechrome
 ```
 
@@ -84,11 +87,11 @@ Apache Maven 3.5.2
 
 ### Download chromedriver ###
 
-```
+```powershell
 > choco install selenium-chrome-driver
 ```
 
-```
+```powershell
 > chromedriver
 Starting ChromeDriver 2.33.506106 (8a06c39c4582fbfbab6966dbb1c38a9173bfb1a2) on port 9515
 Only local connections are allowed.
@@ -96,11 +99,11 @@ Only local connections are allowed.
 
 ### Install git ###
 
-```
+```powershell
 > choco install git
 ```
 
-```
+```powershell
 > git --version
 git version 2.15.1
 ```
@@ -110,14 +113,14 @@ git version 2.15.1
 
 ### Create folder ###
 
-```
+```powershell
 > mkdir C:/git
 > cd C:/git
 ```
 
 ### Clone repo ###
 
-```
+```powershell
 > git clone https://github.com/ilyubin/2018.01.pflb.school.git
 ```
 
@@ -137,16 +140,20 @@ Open test file `*Story.java` and just click green triangle
 
 ### Terminal run in Chrome ###
 
-```
+```powershell
 > mvn clean verify -Dwebdriver.driver=chrome
 ```
+### Terminal run in Chrome ###
 
+```powershell
+> mvn clean verify -it.test=PurposeStory#create_purpose
+```
 
 ## Structure ##
 
 ### About project ###
 
-```
+```powershell
 ok.automation
 ├── features
 ├── pages
@@ -220,3 +227,5 @@ public class PurposeSteps implements ISteps {
 
 - `serenity` http://thucydides.info/docs/serenity-staging/#introduction
 - `assertj` http://joel-costigliola.github.io/assertj/
+- how to `git` https://githowto.com/ru
+- locators table http://www.cheat-sheets.org/saved-copy/Locators_table_1_0_2.pdf

@@ -221,7 +221,7 @@ public class PurposeSteps implements ISteps {
 }
 ```
 
-- in `pages` a set of pages it may be `*ListPage`, `*CreatePage`, `*ImportPopup` etc. All pages extends from `PageObjectAdminPortalExtension`. Implement all page's methods using selenium/serenity commands
+- in `pages` a set of pages it may be `*ListPage`, `*CreatePage`, `*ImportPopup` etc. Implement all page's methods using selenium/serenity commands
 
 ## Links ##
 

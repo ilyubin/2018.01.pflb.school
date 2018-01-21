@@ -27,14 +27,14 @@ public class FriendStory extends BaseFeature {
     }
 
     @Test @Pending
-    public void searching_by_keyword_apple_should_display_the_corresponding_article() {
+    public void search_friend() {
     }
 
     @Test @Pending
-    public void searching_by_keyword_banana_should_display_the_corresponding_article() {
+    public void send_request_to_friend() {
     }
 
     @Test @Pending
-    public void searching_by_ambiguious_keyword_should_display_the_disambiguation_page() {
+    public void accept_friend_request() {
     }
 } 

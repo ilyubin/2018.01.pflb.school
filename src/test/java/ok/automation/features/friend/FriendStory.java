@@ -1,6 +1,5 @@
 package ok.automation.features.friend;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.steps.FriendSteps;
 import ok.automation.steps.UserSteps;
@@ -12,8 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FriendStory extends BaseFeature {
 
-    private boolean loggedIn = false;
-
     @Steps
     private FriendSteps _friend;
 
@@ -22,11 +19,6 @@ public class FriendStory extends BaseFeature {
 
     @Before
     public void open_friend_page() {
-        if (!loggedIn) {
-            _user.open_login_page();
-            _user.loginToOkRu(okLogin, okPass);
-            loggedIn = true;
-        }
         _friend.open_page();
     }
 
@@ -47,8 +39,13 @@ public class FriendStory extends BaseFeature {
     }
 
     @Test
-    @Pending
     public void accept_friend_request() {
-        
+        _friend.open_in_requests_page();
+        String userId = _friend.get_first_user_id_in_in_requests();
+        String userName = _friend.get_first_user_name_in_in_requests();
+        _friend.accept_in_request_with_user_id(userId);
+        _friend.open_page();
+        _friend.search_for(userName);
+        assertThat(userName).isEqualTo(_friend.get_found_friend_name_by_id(userId));
     }
 } 

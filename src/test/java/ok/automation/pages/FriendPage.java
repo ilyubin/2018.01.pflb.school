@@ -12,6 +12,11 @@ import java.util.List;
 @DefaultUrl("https://ok.ru")
 public class FriendPage extends PageObject {
 
+    @FindBy(css = "#hook_Block_MainContainer")
+    private WebElementFacade mainContainer;
+
+    /* Общие кнопки */
+
     @FindBy(css = "#hook_Block_HeaderTopFriendsInToolbar a")
     private WebElementFacade friendsHeaderButton;
 
@@ -21,20 +26,16 @@ public class FriendPage extends PageObject {
     @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=\"OutgoingFriendRequests\"]")
     private WebElementFacade friendOutRequestsButton;
 
-    @FindBy(css = "[data-l*=\"BY_NAME\"]")
-    private WebElementFacade searchByFirstAndLastNameButton;
-
-    @FindBy(css = "[data-l*=\"COLLEAGUES\"]")
-    private WebElementFacade findColleaguesButton;
-
-    @FindBy(css = "[data-l*=\"SCHOOL_FRIENDS\"]")
-    private WebElementFacade findSchoolOrUniversityFriendsButton;
-
-    @FindBy(css = "#hook_Block_MyFriendsNewPageMRB a[data-l*=sendMessage][hrefattrs*=\"585960467204\"]")
-    private WebElementFacade writeFriendButton;
+    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=\"userFriendRequest\"]")
+    private WebElementFacade friendInRequestsButton;
 
     @FindBy(css = "input#search")
     private WebElementFacade searchField;
+
+    /* Поиск среди друзей по имени */
+
+    @FindBy(css = "#searchResults")
+    private WebElementFacade foundFriendsBlock;
 
     @FindBy(css = "#hook_Block_MyFriendsFriendSearchPagingB .gs_result_list > div > .ucard-v")
     private List<WebElementFacade> foundFriendsOnPage;
@@ -42,11 +43,15 @@ public class FriendPage extends PageObject {
     @FindBy(css = "#hook_Loader_MyFriendsGlobalSearchPagingBLoader")
     private WebElementFacade foundUsersResultEndlessBlock;
 
-    @FindBy(css = "div[data-block='OutgoingFriendshipRequests']")
-    private WebElementFacade outRequestsUsersEndlessBlock;
+    /* Запросы в друзья */
 
-    @FindBy(css = "#hook_Block_MainContainer")
-    private WebElementFacade mainContainer;
+    @FindBy(css = "div[data-block='OutgoingFriendshipRequests']")
+    private WebElementFacade outRequestsUsersEndlessBlock; // Исходящие запросы
+
+    @FindBy(css = "#hook_Loader_UserFriendRequestMRBLoader")
+    private WebElementFacade inRequestsUsersEndlessBlock; // Входящие запросы
+
+    /* Переходы на подстраницы */
 
     public void openFriendPage() {
         friendsHeaderButton.click();
@@ -56,6 +61,13 @@ public class FriendPage extends PageObject {
         new Actions(getDriver()).moveToElement(mainContainer).perform();
         friendOutRequestsButton.click();
     }
+
+    public void openFriendInRequestsPage() {
+        new Actions(getDriver()).moveToElement(mainContainer).perform();
+        friendInRequestsButton.click();
+    }
+
+    /* Поиск среди друзей */
 
     public void searchFor(String searchRequest) {
         searchField.typeAndEnter(searchRequest);
@@ -69,11 +81,17 @@ public class FriendPage extends PageObject {
         return foundFriendsOnPage.get(index).findElement(By.cssSelector(".shortcut-wrap")).getText();
     }
 
-    public boolean usersFoundResultNotEmpty() {
+    public String getFoundFriendNameOnPageById(String userId) {
+        return foundFriendsBlock.findElement(By.cssSelector("a[href*='" + userId + "'][data-l*='User_name']")).getText();
+    }
+
+    /* Поиск среди других пользователей */
+
+    public boolean hasUsersInFoundResult() {
         return foundUsersResultEndlessBlock.containsElements(By.cssSelector(".ucard-v"));
     }
 
-    public boolean canAddAnyUserToFriends() {
+    public boolean canAddAnyFoundUserToFriends() {
         return hasAnyElementInEndlessBlock(foundUsersResultEndlessBlock, By.cssSelector(".ucard-v .button-pro"));
     }
 
@@ -85,33 +103,57 @@ public class FriendPage extends PageObject {
                 .split("\\D+")[1];
     }
 
-    public boolean usersOutRequestsNotEmpty() {
+    /* Исходящие запросы: OutRequests */
+
+    public boolean hasUsersOutRequests() {
         return outRequestsUsersEndlessBlock.containsElements(By.cssSelector(".ucard-w-list_i"));
     }
 
-    public boolean hasUserInOutRequestListWithId(String userId) {
+    public boolean isUserWithIdInOutRequests(String userId) {
         String selector = "div[data-entity-id='" + userId + "']";
         return hasAnyElementInEndlessBlock(outRequestsUsersEndlessBlock, By.cssSelector(selector));
     }
 
-    public String getUserNameInFriendsOutRequestById(String userId) {
+    public String getUserNameByIdInOutRequests(String userId) {
         return outRequestsUsersEndlessBlock.find(By.cssSelector("div[data-entity-id='" + userId + "']"))
                 .find(By.cssSelector("div.ellip-i > a")).getText();
     }
 
-    protected boolean hasAnyElementInEndlessBlock(WebElementFacade endlessBlock, By elementSelector) {
+    /* Входящие запросы: InRequest */
+
+    public boolean hasUsersInRequests() {
+        return inRequestsUsersEndlessBlock.containsElements(By.cssSelector(".ucard-w-list_i"));
+    }
+
+    public String getFirstUserNameInInRequests() {
+        WebElementFacade futureFriend = inRequestsUsersEndlessBlock.find(By.cssSelector("div.ucard-w-list_i"));
+        return futureFriend.find(By.cssSelector("div.ellip-i > a")).getText();
+    }
+
+    public String getFirstUserIdInInRequests() {
+        WebElementFacade futureFriend = inRequestsUsersEndlessBlock.find(By.cssSelector("div.ucard-w-list_i"));
+        return getUserIdFromProfileLink(futureFriend.find(By.cssSelector("div.ellip-i > a")).getAttribute("href"));
+    }
+
+    public void acceptUserWithIdInRequest(String userId) {
+        find(By.cssSelector("span[data-l*=inviteFromButton][data-entity-id='" + userId + "']")).click();
+    }
+
+    /* Полезные методы */
+
+    private boolean hasAnyElementInEndlessBlock(WebElementFacade endlessBlock, By elementSelector) {
         int pageBefore = Integer.parseInt(endlessBlock.getAttribute("data-page"));
         int pageAfter = 0;
         boolean containsElement = endlessBlock.containsElements(elementSelector);
         By showMoreLinkSelector = By.cssSelector("a.link-show-more");
         while (!containsElement && pageBefore != pageAfter) {
-            while(pageBefore != pageAfter){
+            while (pageBefore != pageAfter) {
                 pageBefore = pageAfter;
                 WebElementFacade lastChildInList = endlessBlock.find(By.xpath("div[1]/div[last()]"));
                 new Actions(getDriver()).moveToElement(lastChildInList).perform();
                 pageAfter = Integer.parseInt(endlessBlock.getAttribute("data-page"));
                 containsElement = endlessBlock.containsElements(elementSelector);
-                if(containsElement){
+                if (containsElement) {
                     break;
                 }
             }
@@ -122,5 +164,9 @@ public class FriendPage extends PageObject {
             }
         }
         return containsElement;
+    }
+
+    private String getUserIdFromProfileLink(String profileLink) {
+        return profileLink.split("\\D+")[1];
     }
 }

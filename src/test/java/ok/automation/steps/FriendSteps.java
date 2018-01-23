@@ -16,6 +16,18 @@ public class FriendSteps implements ISteps {
         friendPage.openFriendPage();
     }
 
+    /* Главная страница */
+
+    @Step
+    public String get_first_friend_name() {
+        return friendPage.getFirstFriendName();
+    }
+
+    @Step
+    public String get_last_friend_name() {
+        return friendPage.getLastFriendName();
+    }
+
     /* Поиск среди друзей по имени */
 
     @Step
@@ -42,7 +54,7 @@ public class FriendSteps implements ISteps {
     }
 
     @Step
-    public String get_found_friend_name_by_id(String userId){
+    public String get_found_friend_name_by_id(String userId) {
         return friendPage.getFoundFriendNameOnPageById(userId);
     }
 
@@ -69,23 +81,23 @@ public class FriendSteps implements ISteps {
     }
 
     @Step
-    public String get_first_user_name_in_in_requests(){
-        if(friendPage.hasUsersInRequests()) {
+    public String get_first_user_name_in_in_requests() {
+        if (friendPage.hasUsersInRequests()) {
             return friendPage.getFirstUserNameInInRequests();
         }
         return null;
     }
 
     @Step
-    public String get_first_user_id_in_in_requests(){
-        if(friendPage.hasUsersInRequests()) {
+    public String get_first_user_id_in_in_requests() {
+        if (friendPage.hasUsersInRequests()) {
             return friendPage.getFirstUserIdInInRequests();
         }
         return null;
     }
 
     @Step
-    public void accept_in_request_with_user_id(String userId){
+    public void accept_in_request_with_user_id(String userId) {
         friendPage.acceptUserWithIdInRequest(userId);
     }
 

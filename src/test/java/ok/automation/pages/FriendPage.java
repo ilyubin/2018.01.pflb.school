@@ -32,6 +32,9 @@ public class FriendPage extends PageObject {
     @FindBy(css = "input#search")
     private WebElementFacade searchField;
 
+    @FindBy(css = "#hook_Loader_MyFriendsSquareCardsPagingBLoader")
+    private WebElementFacade welcomeFriendBlock;
+
     /* Поиск среди друзей по имени */
 
     @FindBy(css = "#searchResults")
@@ -65,6 +68,16 @@ public class FriendPage extends PageObject {
     public void openFriendInRequestsPage() {
         new Actions(getDriver()).moveToElement(mainContainer).perform();
         friendInRequestsButton.click();
+    }
+
+    /* Главная страница */
+
+    public String getFirstFriendName() {
+        return welcomeFriendBlock.find(By.xpath("(//div[@id='hook_Loader_MyFriendsSquareCardsPagingBLoader']//a[@class='o'])[1]")).getText();
+    }
+
+    public String getLastFriendName() {
+        return welcomeFriendBlock.find(By.xpath("(//div[@id='hook_Loader_MyFriendsSquareCardsPagingBLoader']//a[@class='o'])[last()]")).getText();
     }
 
     /* Поиск среди друзей */

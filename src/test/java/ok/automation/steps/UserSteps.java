@@ -24,4 +24,9 @@ public class UserSteps {
     public String nameInHeader() {
         return mainPage.getUserName();
     }
+
+    @Step
+    public void loginToOkRu() {
+        loginPage.loginToOkRu();
+    }
 }

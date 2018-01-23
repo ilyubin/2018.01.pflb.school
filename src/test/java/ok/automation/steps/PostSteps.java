@@ -15,13 +15,14 @@ public class PostSteps implements ISteps {
 
     @Step
     public void create_text_post(String text) {
-//        mainPage.fillPost(text);
-//        mainPage.submitPost();
+        mainPage.initNewPost();
+        mainPage.fillPost(text);
+        mainPage.submitPost();
     }
 
     @Step
     public String last() {
-//         String post = mainPage.getLastPost();
-        return "";
+        mainPage.open();
+        return mainPage.getLastPost();
     }
 }

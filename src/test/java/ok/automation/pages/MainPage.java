@@ -45,4 +45,12 @@ public class MainPage extends PageObject {
         WebElementFacade post = findBy(String.format("#hook_Block_MainFeedsContent .feed-w:nth-of-type(%s) .media-text_cnt", index + 3));
         return post.getText();
     }
+
+//    @FindBy(css=".entity-avatar [srcset]")
+    @FindBy(css="a[hrefattrs$=OpenPhoto]")
+    private WebElementFacade buttonAvatar;
+
+    public void clickAvatar() {
+        buttonAvatar.click();
+    }
 }

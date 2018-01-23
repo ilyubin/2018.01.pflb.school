@@ -31,8 +31,11 @@ public class AvatarStory extends BaseFeature {
         assertThat(_avatar.avatarDescription()).isEqualTo(text);
     }
 
-    @Test @Pending
+    @Test
     public void add_comment() {
+        String text = fake.lorem().sentence();
+        _avatar.create_text_comment(text);
+        assertThat(_avatar.avatarComment()).isEqualTo(text);
     }
 
     @Test @Pending

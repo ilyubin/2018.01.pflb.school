@@ -13,35 +13,45 @@ public class MainPage extends PageObject {
     @FindBy(css=".mctc_name_tx")
     private WebElementFacade userNameInHeader;
 
-    @FindBy(css="#hook_Block_PostingForm a[data-l*=input]")
-    private WebElementFacade postFieldHolder;
+    @FindBy(css=".input_placeholder")
+    private WebElementFacade postField;
 
     @FindBy(css=".posting_itx-w [data-initial-text-to-modify]")
     private WebElementFacade popupPostField;
 
     @FindBy(css=".posting_footer [data-action=submit]")
-    private WebElementFacade popupPostSubmit;
-
-    @FindBy(xpath="(//div[@class='feed-list']//div[@class='media-text_cnt'])[1]")
-    private WebElementFacade lastPost;
-
-    @FindBy(xpath="//div[@class='feed-list']//div[@class='media-text_cnt']")
-    private List<WebElementFacade> allPosts;
-
+    private WebElementFacade popupShareButton;
     public String getUserName() {
         return userNameInHeader.getText();
     }
 
+    public void initNewPost() {
+        postField.click();
+    }
+
     public void fillPost(String text) {
-        postFieldHolder.click();
-        popupPostField.type(text);
+        popupPostField.click();
+        popupPostField.sendKeys(text);
     }
 
     public void submitPost() {
-        popupPostSubmit.click();
+        popupShareButton.click();
     }
 
     public String getLastPost() {
-        return lastPost.getText();
+        return _getPostByIndex(0);
+    }
+
+    public String _getPostByIndex(int index) {
+        WebElementFacade post = findBy(String.format("#hook_Block_MainFeedsContent .feed-w:nth-of-type(%s) .media-text_cnt", index + 3));
+        return post.getText();
+    }
+
+//    @FindBy(css=".entity-avatar [srcset]")
+    @FindBy(css="a[hrefattrs$=OpenPhoto]")
+    private WebElementFacade buttonAvatar;
+
+    public void clickAvatar() {
+        buttonAvatar.click();
     }
 }

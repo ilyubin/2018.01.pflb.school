@@ -19,8 +19,7 @@ public class PostStory extends BaseFeature {
 
     @Before
     public void open_login_page() {
-        _user.open_login_page();
-        _user.loginToOkRu(okLogin, okPass);
+        _post.open_page();
     }
 
     @Test

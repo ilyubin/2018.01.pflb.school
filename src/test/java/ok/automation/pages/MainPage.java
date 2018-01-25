@@ -5,8 +5,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-import java.util.List;
-
 @DefaultUrl("https://ok.ru")
 public class MainPage extends PageObject {
 
@@ -47,7 +45,6 @@ public class MainPage extends PageObject {
         return post.getText();
     }
 
-//    @FindBy(css=".entity-avatar [srcset]")
     @FindBy(css="a[hrefattrs$=OpenPhoto]")
     private WebElementFacade buttonAvatar;
 

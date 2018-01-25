@@ -182,4 +182,8 @@ public class FriendPage extends PageObject {
     private String getUserIdFromProfileLink(String profileLink) {
         return profileLink.split("\\D+")[1];
     }
+
+    @FindBy(css="#hook_Block_MyFriendsNewPageMRB a[data-l*=sendMessage][hrefattrs*=\"585960467204\"]")
+    private WebElementFacade writeFriendButton;
+
 }

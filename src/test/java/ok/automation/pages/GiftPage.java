@@ -1,9 +1,12 @@
 package ok.automation.pages;
 
+import com.google.common.base.Supplier;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+
+import java.util.function.BiPredicate;
 
 @DefaultUrl("/gifts")
 public class GiftPage extends PageObject {
@@ -29,6 +32,9 @@ public class GiftPage extends PageObject {
     @FindBy(css="#proceedButton")
     private WebElementFacade touchButton;
 
+    @FindBy(css=".button-pro_tx")
+    private WebElementFacade getCodeButton;
+
     public void fillSearchFiled(String text) {
         searchInputField.type(text);
     }
@@ -52,10 +58,15 @@ public class GiftPage extends PageObject {
     public void clickFriendPhoto(){firstFriendImg.click();}
 
     public void clickTouchButton(){
-    //getDriver().switchTo().frame("modal-new_payment-frame");
-    getDriver().switchTo().frame(payFrame);
+        getDriver().switchTo().frame(payFrame);
         touchButton.click();
     }
+
+    public String getButtonName(){
+        return getCodeButton.getText();
+    }
+
+
 
 
 }

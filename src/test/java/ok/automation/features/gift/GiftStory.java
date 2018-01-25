@@ -10,6 +10,8 @@ import ok.automation.steps.TopContentRowSteps;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class GiftStory extends BaseFeature {
 
     @Steps
@@ -26,8 +28,6 @@ public class GiftStory extends BaseFeature {
 
     @Before
     public void open_login_page() {
-        _user.open_login_page();
-        _user.loginToOkRu(okLogin, okPass);
         _gift.open_page();
     }
 
@@ -41,6 +41,7 @@ public class GiftStory extends BaseFeature {
           _gift.select_gift();
           _gift.select_friend();
           _gift.send();
+          assertThat(_gift.getButtonName()).isEqualTo("Получить код");// проверяем кнопку "получить код", тк нет возможности двигаться дальше
     }
 
     @Test
@@ -51,6 +52,6 @@ public class GiftStory extends BaseFeature {
         _gift.select_font_style();
         _gift.select_orange_fontColor();
         _gift.complete_gift_creation();
-
+        assertThat(_gift.getCongats()).isEqualTo("Отличная работа! Вы только что сделали подарок своими руками!");
     }
 } 

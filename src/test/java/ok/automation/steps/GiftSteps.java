@@ -70,8 +70,17 @@ public class GiftSteps implements ISteps {
 
     @Step
     public void send(){
-
         giftPage.clickTouchButton();
+    }
+
+    @Step
+    public String getButtonName(){
+        return giftPage.getButtonName();
+    }
+
+    @Step
+    public String getCongats(){
+        return  giftConstructorPage.congrats();
     }
 
 

@@ -23,35 +23,33 @@ public class GiftConstructorPage extends PageObject {
     @FindBy(css="#id-start_text_present_btn")
     private WebElementFacade textGiftIcon;
 
+    @FindBy(css=".pts_congrats")
+    private WebElementFacade congratsText;
+
     public void fillTextField(String text){
-        //getDriver().switchTo().frame(frameId);
         textField.type(text);
-        //getDriver().switchTo().defaultContent();
     }
 
     public void selectColor(){
-        //getDriver().switchTo().frame(frameId);
         color.click();
-        //getDriver().switchTo().defaultContent();
     }
 
     public void selectFont(){
-        //getDriver().switchTo().frame(frameId);
         font.click();
-        //getDriver().switchTo().defaultContent();
     }
 
     public void clickGiftReadyButton(){
-        //getDriver().switchTo().frame(frameId);
         giftReadyButton.click();
-        getDriver().switchTo().defaultContent();
     }
 
     public void selectTextGift(){
         getDriver().switchTo().frame(frameId);
         textGiftIcon.click();
-        //getDriver().switchTo().defaultContent();
+    }
 
+    public String congrats(){
+        congratsText.waitUntilPresent();
+        return congratsText.getText();
     }
 
 

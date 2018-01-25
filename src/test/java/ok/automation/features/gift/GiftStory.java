@@ -4,7 +4,6 @@ import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
-import ok.automation.steps.TopContentRowSteps;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,9 +13,6 @@ public class GiftStory extends BaseFeature {
 
     @Steps
     private GiftSteps _gift;
-
-    @Steps
-    private TopContentRowSteps _row;
 
     @Before
     public void open_login_page() {

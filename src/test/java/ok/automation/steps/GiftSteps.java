@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import ok.automation.pages.GiftConstructorPage;
 import ok.automation.pages.GiftPage;
 import ok.automation.pages.MainPage;
+import ok.automation.pages.TopContentRow;
 import ok.automation.tech.extensions.ISteps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,6 +15,13 @@ public class GiftSteps implements ISteps {
     GiftPage giftPage;
 
     GiftConstructorPage giftConstructorPage;
+
+    TopContentRow topContentRow;
+
+    @Step
+    public void open_gift_page() {
+        topContentRow.openGiftPage();
+    }
 
     @Step
     public void open_page() {

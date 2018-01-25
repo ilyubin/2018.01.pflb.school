@@ -26,7 +26,14 @@ public class FriendPage extends PageObject {
     @FindBy(css="[data-l*=\"SCHOOL_FRIENDS\"]")
     private WebElementFacade findSchoolOrUniversityFriendsButton;
 
+    @FindBy(css="#action_menu_send_gift_a")
+    private WebElementFacade presentFriendButton;
+
     @FindBy(css="#hook_Block_MyFriendsNewPageMRB a[data-l*=sendMessage][hrefattrs*=\"585960467204\"]")
     private WebElementFacade writeFriendButton;
+
+    public void clickPresent(){
+        presentFriendButton.click();
+    }
     
 }

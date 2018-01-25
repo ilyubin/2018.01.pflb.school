@@ -28,7 +28,6 @@ public class GiftStory extends BaseFeature {
     public void open_login_page() {
         _user.open_login_page();
         _user.loginToOkRu(okLogin, okPass);
-
         _gift.open_page();
     }
 
@@ -48,9 +47,10 @@ public class GiftStory extends BaseFeature {
     public void try_to_create_own_gift() {
         _gift.create_own_gift();
         _gift.create_text_gift();
-        _gift.input_text("Поздравляю");
+        //_gift.input_text("Поздравляю");
         _gift.select_font_style();
         _gift.select_orange_fontColor();
         _gift.complete_gift_creation();
+
     }
 } 

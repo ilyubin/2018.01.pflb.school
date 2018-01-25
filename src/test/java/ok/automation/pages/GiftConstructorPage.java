@@ -6,6 +6,8 @@ import net.thucydides.core.pages.PageObject;
 
 public class GiftConstructorPage extends PageObject {
 
+    private String frameId = "appMain_Div";
+
     @FindBy(css="li[data-color*='#ff8100']")
     private WebElementFacade color;
 
@@ -22,25 +24,33 @@ public class GiftConstructorPage extends PageObject {
     private WebElementFacade textGiftIcon;
 
     public void fillTextField(String text){
+        //getDriver().switchTo().frame(frameId);
         textField.type(text);
+        //getDriver().switchTo().defaultContent();
     }
 
     public void selectColor(){
+        //getDriver().switchTo().frame(frameId);
         color.click();
+        //getDriver().switchTo().defaultContent();
     }
 
     public void selectFont(){
+        //getDriver().switchTo().frame(frameId);
         font.click();
+        //getDriver().switchTo().defaultContent();
     }
 
     public void clickGiftReadyButton(){
+        //getDriver().switchTo().frame(frameId);
         giftReadyButton.click();
+        getDriver().switchTo().defaultContent();
     }
 
     public void selectTextGift(){
-        getDriver().switchTo().frame("appMain_Div");
+        getDriver().switchTo().frame(frameId);
         textGiftIcon.click();
-        getDriver().switchTo().defaultContent();
+        //getDriver().switchTo().defaultContent();
 
     }
 

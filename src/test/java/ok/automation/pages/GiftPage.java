@@ -17,6 +17,9 @@ public class GiftPage extends PageObject {
     @FindBy(css=".search-input_ic ic18.ic18_anim-procces")
     private WebElementFacade waitIcon;
 
+    @FindBy(css=".modal-new_payment-frame")
+    private WebElementFacade payFrame;
+
     @FindBy(css=".gifts-sidebanner_tx")
     private WebElementFacade giftCreationBanner;
 
@@ -49,8 +52,8 @@ public class GiftPage extends PageObject {
     public void clickFriendPhoto(){firstFriendImg.click();}
 
     public void clickTouchButton(){
-        //while(to.isDisplayed());
-        touchButton.waitUntilClickable();
+    //getDriver().switchTo().frame("modal-new_payment-frame");
+    getDriver().switchTo().frame(payFrame);
         touchButton.click();
     }
 

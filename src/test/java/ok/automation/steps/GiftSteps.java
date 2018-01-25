@@ -70,6 +70,7 @@ public class GiftSteps implements ISteps {
 
     @Step
     public void send(){
+
         giftPage.clickTouchButton();
     }
 

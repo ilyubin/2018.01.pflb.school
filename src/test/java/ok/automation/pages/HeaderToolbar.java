@@ -10,9 +10,6 @@ public class HeaderToolbar extends PageObject {
     @FindBy(css="#hook_Block_HeaderTopFriendsInToolbar a")
     private WebElementFacade friendsHeaderButton;
 
-
-
-
     private WebElementFacade friendsHeaderButton() {
         return find(By.cssSelector("#hook_Block_HeaderTopFriendsInToolbar a"));
     }

@@ -14,6 +14,4 @@ public class TopContentRow extends PageObject {
         giftsHeaderButton.click();
     }
 
-
-
 }

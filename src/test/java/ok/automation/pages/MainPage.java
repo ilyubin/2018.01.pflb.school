@@ -19,6 +19,7 @@ public class MainPage extends PageObject {
 
     @FindBy(css=".posting_footer [data-action=submit]")
     private WebElementFacade popupShareButton;
+
     public String getUserName() {
         return userNameInHeader.getText();
     }
@@ -50,5 +51,16 @@ public class MainPage extends PageObject {
 
     public void clickAvatar() {
         buttonAvatar.click();
+    }
+
+    public void hoverToAvatar() {
+        withAction().moveToElement(buttonAvatar).build().perform();
+    }
+
+    @FindBy(css="#hook_Block_Avatar [data-url$=PhotoUserActionCrop]")
+    private WebElementFacade buttonEditAvatar;
+
+    public void clickEditAvatar() {
+        buttonEditAvatar.click();
     }
 }

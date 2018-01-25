@@ -34,7 +34,8 @@ public class AvatarStory extends BaseFeature {
         assertThat(_avatar.avatarComment()).isEqualTo(text);
     }
 
-    @Test @Pending
+    @Test
     public void edit_photo_without_changes() {
+        _avatar.edit_photo();
     }
 } 

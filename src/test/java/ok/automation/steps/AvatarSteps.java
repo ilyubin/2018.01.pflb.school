@@ -35,7 +35,6 @@ public class AvatarSteps implements ISteps {
     @Step
     public void create_text_comment(String text) {
         mainPage.clickAvatar();
-        avatarPage.clickTextBoxComment();
         avatarPage.fillComment(text);
         avatarPage.clickAddComment();
     }
@@ -44,5 +43,12 @@ public class AvatarSteps implements ISteps {
     public String avatarComment() {
         String post = avatarPage.getAvatarComment();
         return post;
+    }
+
+    @Step
+    public void edit_photo() {
+        mainPage.hoverToAvatar();
+        mainPage.clickEditAvatar();
+        avatarPage.clickOkEditAvatar();
     }
 }

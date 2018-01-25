@@ -47,10 +47,21 @@ public class MainPage extends PageObject {
     }
 
 //    @FindBy(css=".entity-avatar [srcset]")
-    @FindBy(css="a[hrefattrs$=OpenPhoto]")
+    @FindBy(css="#hook_Block_Avatar a[hrefattrs$=OpenPhoto]")
     private WebElementFacade buttonAvatar;
 
     public void clickAvatar() {
         buttonAvatar.click();
+    }
+
+    public void hoverToAvatar() {
+        withAction().moveToElement(buttonAvatar).build().perform();
+    }
+
+    @FindBy(css="#hook_Block_Avatar [data-url$=PhotoUserActionCrop]")
+    private WebElementFacade buttonEditAvatar;
+
+    public void clickEditAvatar() {
+        buttonEditAvatar.click();
     }
 }

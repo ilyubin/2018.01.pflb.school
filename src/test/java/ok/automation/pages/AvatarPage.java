@@ -7,7 +7,7 @@ import net.thucydides.core.pages.PageObject;
 
 public class AvatarPage extends PageObject{
 
-    @FindBy(css="#plp_descrChgLnk")
+    @FindBy(id="plp_descrChgLnk")
 //    @FindBy(css="#plp_descrAddLnk") // TODO fix for first time add description
     private WebElementFacade buttonAddDescription;
     public void clickAddDescription() {
@@ -20,23 +20,30 @@ public class AvatarPage extends PageObject{
         fieldDescription.type(text);
     }
 
-    @FindBy(css="[name=\"plp_descrInpBtn\"]")
+    @FindBy(id="plp_descrInpBtn")
     private WebElementFacade buttonSaveDescription;
     public void clickSaveDescription() {
         buttonSaveDescription.click();
     }
 
-    @FindBy(css="#plp_descrCntText")
+    @FindBy(id="plp_descrCntText")
     private WebElementFacade avatarDescription;
     public String getAvatarDescription() {
         return avatarDescription.getText();
     }
 
-    @FindBy(css="[contenteditable]")
+    @FindBy(css="[action*=CommentBlock] [id^=field]")
     private WebElementFacade fieldComment;
-    public void fillComment(String text) { fieldComment.type(text); }
+    public void fillComment(String text) {
+        _scroll(fieldComment);
+        fieldComment.type(text);
+    }
 
-    @FindBy(css="[data-l=\"t\\,submit\"]")
+    private void _scroll(WebElementFacade element) {
+        withAction().moveToElement(element).build().perform();
+    }
+
+    @FindBy(css=".comments_add-controls .form-actions_yes")
     private WebElementFacade buttonAddComment;
     public void clickAddComment() {
         buttonAddComment.waitUntilVisible();
@@ -49,8 +56,9 @@ public class AvatarPage extends PageObject{
         return avatarComment.getText();
     }
 
-    @FindBy(css="[contenteditable]")
-    private WebElementFacade textBoxComment;
-    public void clickTextBoxComment() { textBoxComment.click();
+    @FindBy(id="hook_FormButton_button_plpscp_confirm")
+    private WebElementFacade buttonOkEditAvatar;
+    public void clickOkEditAvatar() {
+        buttonOkEditAvatar.click();
     }
 }

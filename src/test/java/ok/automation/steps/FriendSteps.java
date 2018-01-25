@@ -15,5 +15,4 @@ public class FriendSteps implements ISteps {
     public void open_page() {
 
     }
-
 }

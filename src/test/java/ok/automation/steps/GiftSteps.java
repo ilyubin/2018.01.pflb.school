@@ -18,14 +18,6 @@ public class GiftSteps implements ISteps {
     @Step
     public void open_page() {
         giftPage.open();
-
-    }
-
-    @Step
-    public void look_for_gift(String text){
-        giftPage.fillSearchFiled(text);
-        giftPage.waitForSearching();
-        //giftPage.getFoundGiftInfo();
     }
 
     @Step

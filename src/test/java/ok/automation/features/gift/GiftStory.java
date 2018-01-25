@@ -2,8 +2,6 @@ package ok.automation.features.gift;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.steps.FriendSteps;
-import ok.automation.steps.UserSteps;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
 import ok.automation.steps.TopContentRowSteps;
@@ -18,22 +16,15 @@ public class GiftStory extends BaseFeature {
     private GiftSteps _gift;
 
     @Steps
-    private UserSteps _user;
-
-    @Steps
     private TopContentRowSteps _row;
-
-    @Steps
-    private FriendSteps _friend;
 
     @Before
     public void open_login_page() {
         _gift.open_page();
     }
 
-    @Test
+    @Test @Pending
     public void search_gift() {
-        _gift.look_for_gift("День рождения");
     }
 
     @Test

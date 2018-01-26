@@ -172,7 +172,7 @@ public class FriendPage extends PageObject {
             }
             if (!containsElement && endlessBlock.containsElements(showMoreLinkSelector)) {
                 WebElementFacade showMoreLink = endlessBlock.find(showMoreLinkSelector);
-                withAction().moveToElement(showMoreLink).click().perform();
+                withAction().moveToElement(showMoreLink).click().build().perform();
                 pageAfter = 0;
             }
         }

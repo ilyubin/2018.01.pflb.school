@@ -5,8 +5,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-import java.util.List;
-
 @DefaultUrl("https://ok.ru")
 public class MainPage extends PageObject {
 
@@ -21,6 +19,7 @@ public class MainPage extends PageObject {
 
     @FindBy(css=".posting_footer [data-action=submit]")
     private WebElementFacade popupShareButton;
+
     public String getUserName() {
         return userNameInHeader.getText();
     }
@@ -47,11 +46,21 @@ public class MainPage extends PageObject {
         return post.getText();
     }
 
-//    @FindBy(css=".entity-avatar [srcset]")
     @FindBy(css="a[hrefattrs$=OpenPhoto]")
     private WebElementFacade buttonAvatar;
 
     public void clickAvatar() {
         buttonAvatar.click();
+    }
+
+    public void hoverToAvatar() {
+        withAction().moveToElement(buttonAvatar).build().perform();
+    }
+
+    @FindBy(css="#hook_Block_Avatar [data-url$=PhotoUserActionCrop]")
+    private WebElementFacade buttonEditAvatar;
+
+    public void clickEditAvatar() {
+        buttonEditAvatar.click();
     }
 }

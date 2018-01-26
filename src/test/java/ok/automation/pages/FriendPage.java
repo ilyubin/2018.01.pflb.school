@@ -181,5 +181,5 @@ public class FriendPage extends PageObject {
 
     @FindBy(css="#hook_Block_MyFriendsNewPageMRB a[data-l*=sendMessage][hrefattrs*=\"585960467204\"]")
     private WebElementFacade writeFriendButton;
-
+    
 }

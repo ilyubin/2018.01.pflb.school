@@ -64,4 +64,11 @@ public class MainPage extends PageObject {
     public void clickEditAvatar() {
         buttonEditAvatar.click();
     }
+
+    @FindBy(css="#hook_Block_Avatar #viewImageLinkId")
+    private WebElementFacade photoImage;
+
+    public String getPhotoUrl() {
+        return photoImage.getAttribute("src");
+    }
 }

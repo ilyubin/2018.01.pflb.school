@@ -52,13 +52,13 @@ public class AvatarPage extends PageObject{
 
     @FindBy(xpath="//div[@class='comments_lst_cnt']/div[last()]//div[@class='comments_text textWrap']")
     private WebElementFacade avatarComment;
-    public String getAvatarComment() {
+    public String getLastComment() {
         return avatarComment.getText();
     }
 
     @FindBy(id="hook_FormButton_button_plpscp_confirm")
     private WebElementFacade buttonOkEditAvatar;
     public void clickOkEditAvatar() {
-        buttonOkEditAvatar.click();
+        withAction().moveToElement(buttonOkEditAvatar).click().build().perform();
     }
 }

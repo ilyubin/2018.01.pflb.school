@@ -66,7 +66,29 @@ public class GiftPage extends PageObject {
         return getCodeButton.getText();
     }
 
+    @FindBy(css="#gf-search-input")
+    private WebElementFacade searchInput;
+
+    /**
+     * Заполнение формы поиска подарка
+     * @param giftName - название подарка для поиска
+     */
+    public void searchGiftInputFill(String giftName) {
+        searchInput.type(giftName);
+    }
+
+    @FindBy(css="#gf-search-lupa")
+    private WebElementFacade searchButton;
+
+    /**
+     * Запуск поиска подарка
+     */
+    public void searchGiftButtonClick() {
+        searchButton.click();
+    }
 
 
-
+//    getCountResultSearchGift() {
+//        webdriver.FindElement(By.Id("id_tb")).FindElements(By.TagName("tr")).Count
+//    }
 }

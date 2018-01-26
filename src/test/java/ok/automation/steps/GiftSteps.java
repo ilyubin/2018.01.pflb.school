@@ -83,5 +83,22 @@ public class GiftSteps implements ISteps {
         return  giftConstructorPage.congrats();
     }
 
+    /**
+     * Заполнение формы и поиск подарка
+     * @param giftName - название подарка для поиска
+     */
+    @Step
+    public void search_gift(String giftName) {
+        giftPage.searchGiftInputFill(giftName);
+        giftPage.searchGiftButtonClick();
+    }
 
+    /**
+     * Получение количества найденных подарков
+     * @return Количество найденных подарков
+     */
+//    @Step
+//    public int getCountResultSearchGift() {
+//        return giftPage.getCountResultSearchGift();
+//    }
 }

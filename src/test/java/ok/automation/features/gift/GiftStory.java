@@ -19,8 +19,13 @@ public class GiftStory extends BaseFeature {
         _gift.open_page();
     }
 
-    @Test @Pending
+    /**
+     * Поиск подарка
+     */
+    @Test
     public void search_gift() {
+        String giftName = fake.lorem().sentence();
+        _gift.search_gift(giftName);
     }
 
     @Test

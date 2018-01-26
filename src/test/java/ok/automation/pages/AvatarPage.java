@@ -2,10 +2,9 @@ package ok.automation.pages;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.pages.PageObject;
+import ok.automation.tech.extensions.PageObjectExtension;
 
-public class AvatarPage extends PageObject{
+public class AvatarPage extends PageObjectExtension {
 
     @FindBy(id="plp_descrChgLnk")
 //    @FindBy(css="#plp_descrAddLnk") // TODO fix for first time add description
@@ -37,10 +36,6 @@ public class AvatarPage extends PageObject{
     public void fillComment(String text) {
         _scroll(fieldComment);
         fieldComment.type(text);
-    }
-
-    private void _scroll(WebElementFacade element) {
-        withAction().moveToElement(element).build().perform();
     }
 
     @FindBy(css=".comments_add-controls .form-actions_yes")

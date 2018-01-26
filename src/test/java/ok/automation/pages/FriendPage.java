@@ -61,12 +61,12 @@ public class FriendPage extends PageObject {
     }
 
     public void openFriendOutRequestsPage() {
-        new Actions(getDriver()).moveToElement(mainContainer).perform();
+        withAction().moveToElement(mainContainer).perform();
         friendOutRequestsButton.click();
     }
 
     public void openFriendInRequestsPage() {
-        new Actions(getDriver()).moveToElement(mainContainer).perform();
+        withAction().moveToElement(mainContainer).perform();
         friendInRequestsButton.click();
     }
 
@@ -163,7 +163,7 @@ public class FriendPage extends PageObject {
             while (pageBefore != pageAfter) {
                 pageBefore = pageAfter;
                 WebElementFacade lastChildInList = endlessBlock.find(By.xpath("div[1]/div[last()]"));
-                new Actions(getDriver()).moveToElement(lastChildInList).perform();
+                withAction().moveToElement(lastChildInList).perform();
                 pageAfter = Integer.parseInt(endlessBlock.getAttribute("data-page"));
                 containsElement = endlessBlock.containsElements(elementSelector);
                 if (containsElement) {
@@ -172,7 +172,7 @@ public class FriendPage extends PageObject {
             }
             if (!containsElement && endlessBlock.containsElements(showMoreLinkSelector)) {
                 WebElementFacade showMoreLink = endlessBlock.find(showMoreLinkSelector);
-                new Actions(getDriver()).moveToElement(showMoreLink).click().perform();
+                withAction().moveToElement(showMoreLink).click().perform();
                 pageAfter = 0;
             }
         }

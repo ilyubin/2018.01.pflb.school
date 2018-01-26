@@ -23,27 +23,27 @@ public class FriendPage extends PageObject {
     @FindBy(css = ".nav-side a[hrefattrs*=OnlineFriends]")
     private WebElementFacade friendsOnlineButton;
 
-    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=\"OutgoingFriendRequests\"]")
+    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=OutgoingFriendRequests]")
     private WebElementFacade friendOutRequestsButton;
 
-    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=\"userFriendRequest\"]")
+    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*=userFriendRequest]")
     private WebElementFacade friendInRequestsButton;
 
     @FindBy(css = "input#search")
     private WebElementFacade searchField;
 
-    @FindBy(css = "#hook_Loader_MyFriendsSquareCardsPagingBLoader")
+    @FindBy(id = "hook_Loader_MyFriendsSquareCardsPagingBLoader")
     private WebElementFacade welcomeFriendBlock;
 
     /* Поиск среди друзей по имени */
 
-    @FindBy(css = "#searchResults")
+    @FindBy(id = "searchResults")
     private WebElementFacade foundFriendsBlock;
 
     @FindBy(css = "#hook_Block_MyFriendsFriendSearchPagingB .gs_result_list > div > .ucard-v")
     private List<WebElementFacade> foundFriendsOnPage;
 
-    @FindBy(css = "#hook_Loader_MyFriendsGlobalSearchPagingBLoader")
+    @FindBy(id = "hook_Loader_MyFriendsGlobalSearchPagingBLoader")
     private WebElementFacade foundUsersResultEndlessBlock;
 
     /* Запросы в друзья */
@@ -51,7 +51,7 @@ public class FriendPage extends PageObject {
     @FindBy(css = "div[data-block='OutgoingFriendshipRequests']")
     private WebElementFacade outRequestsUsersEndlessBlock; // Исходящие запросы
 
-    @FindBy(css = "#hook_Loader_UserFriendRequestMRBLoader")
+    @FindBy(id = "hook_Loader_UserFriendRequestMRBLoader")
     private WebElementFacade inRequestsUsersEndlessBlock; // Входящие запросы
 
     /* Переходы на подстраницы */
@@ -95,7 +95,7 @@ public class FriendPage extends PageObject {
     }
 
     public String getFoundFriendNameOnPageById(String userId) {
-        return foundFriendsBlock.findElement(By.cssSelector("a[href*='" + userId + "'][data-l*='User_name']")).getText();
+        return foundFriendsBlock.findElement(By.cssSelector(String.format("a[href*='%s'][data-l*='User_name']", userId))).getText();
     }
 
     /* Поиск среди других пользователей */
@@ -123,12 +123,12 @@ public class FriendPage extends PageObject {
     }
 
     public boolean isUserWithIdInOutRequests(String userId) {
-        String selector = "div[data-entity-id='" + userId + "']";
+        String selector = String.format("div[data-entity-id='%s']", userId);
         return hasAnyElementInEndlessBlock(outRequestsUsersEndlessBlock, By.cssSelector(selector));
     }
 
     public String getUserNameByIdInOutRequests(String userId) {
-        return outRequestsUsersEndlessBlock.find(By.cssSelector("div[data-entity-id='" + userId + "']"))
+        return outRequestsUsersEndlessBlock.find(By.cssSelector(String.format("div[data-entity-id='%s']", userId)))
                 .find(By.cssSelector("div.ellip-i > a")).getText();
     }
 
@@ -145,11 +145,11 @@ public class FriendPage extends PageObject {
 
     public String getFirstUserIdInInRequests() {
         WebElementFacade futureFriend = inRequestsUsersEndlessBlock.find(By.cssSelector("div.ucard-w-list_i"));
-        return getUserIdFromProfileLink(futureFriend.find(By.cssSelector("div.ellip-i > a")).getAttribute("href"));
+        return futureFriend.find(By.cssSelector("div.entity-item")).getAttribute("data-entity-id");
     }
 
     public void acceptUserWithIdInRequest(String userId) {
-        find(By.cssSelector("span[data-l*=inviteFromButton][data-entity-id='" + userId + "']")).click();
+        find(By.cssSelector(String.format("span[data-l*=inviteFromButton][data-entity-id='%s']", userId))).click();
     }
 
     /* Полезные методы */
@@ -177,9 +177,5 @@ public class FriendPage extends PageObject {
             }
         }
         return containsElement;
-    }
-
-    private String getUserIdFromProfileLink(String profileLink) {
-        return profileLink.split("\\D+")[1];
     }
 }

@@ -39,8 +39,8 @@ public class GiftStory extends BaseFeature {
     public void try_to_create_own_gift() {
         _gift.create_own_gift();
         _gift.create_text_gift();
-        //_gift.input_text("Поздравляю");
         _gift.select_font_style();
+        //_gift.input_text("Поздравляю");
         _gift.select_orange_fontColor();
         _gift.complete_gift_creation();
         assertThat(_gift.getCongats()).isEqualTo("Отличная работа! Вы только что сделали подарок своими руками!");

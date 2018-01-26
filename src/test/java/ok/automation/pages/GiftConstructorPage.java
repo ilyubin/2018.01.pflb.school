@@ -11,7 +11,7 @@ public class GiftConstructorPage extends PageObject {
     @FindBy(css="li[data-color*='#ff8100']")
     private WebElementFacade color;
 
-    @FindBy(css="#id-text_input']")
+    @FindBy(xpath="//*[@id=\"id-text_input\"]']")
     private WebElementFacade textField;
 
     @FindBy(css="div[data-font_index*='1']")
@@ -27,6 +27,7 @@ public class GiftConstructorPage extends PageObject {
     private WebElementFacade congratsText;
 
     public void fillTextField(String text){
+        textField.waitUntilEnabled();
         textField.type(text);
     }
 

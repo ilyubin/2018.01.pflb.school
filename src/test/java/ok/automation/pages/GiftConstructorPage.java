@@ -53,10 +53,4 @@ public class GiftConstructorPage extends PageObject {
         return congratsText.getText();
     }
 
-
-
-
-
-
-
 }

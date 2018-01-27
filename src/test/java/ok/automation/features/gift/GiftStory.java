@@ -4,7 +4,6 @@ import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
-import ok.automation.steps.TopContentRowSteps;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,9 +13,6 @@ public class GiftStory extends BaseFeature {
 
     @Steps
     private GiftSteps _gift;
-
-    @Steps
-    private TopContentRowSteps _row;
 
     @Before
     public void open_login_page() {
@@ -43,6 +39,6 @@ public class GiftStory extends BaseFeature {
         //_gift.input_text("Поздравляю");
         _gift.select_orange_fontColor();
         _gift.complete_gift_creation();
-        assertThat(_gift.getCongats()).isEqualTo("Отличная работа! Вы только что сделали подарок своими руками!");
+        assertThat(_gift.getCongats()).isEqualTo("Well done! You've just created your own custom gift!");
     }
 } 

@@ -37,11 +37,6 @@ public class GiftSteps implements ISteps {
         giftConstructorPage.fillTextField(text);
     }
 
-//    @Step
-//    public void select_orange_fontColor(){
-//        giftConstructorPage.selectColor();
-//    }
-
     @Step
     public void select_font_color(String element){
         giftConstructorPage.selectColor(element);

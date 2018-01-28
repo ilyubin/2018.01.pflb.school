@@ -30,10 +30,9 @@ public class GiftConstructorPage extends PageObject {
     @FindBy(css=".pts_congrats")
     private WebElementFacade congratsText;
 
-    public void fillTextField(String text){
-        getDriver().switchTo().frame(frameId);
-        evaluateJavascript("document.getElementById('id-text_input').value=\"лаплуполыоп\"");
-        getDriver().switchTo().parentFrame();
+    public void fillTextField(String text) {
+        String js = String.format("document.getElementById('id-text_input').value= \"%s\"",text);
+        helper.doInFrame(frameId, () -> evaluateJavascript(js));
     }
 
     public void selectColor(String element){
@@ -53,9 +52,6 @@ public class GiftConstructorPage extends PageObject {
     }
 
     public String congrats(){
-        getDriver().switchTo().frame(frameId);
-        congratsText.waitUntilPresent();
-        getDriver().switchTo().parentFrame();
         return helper.doInFrame(frameId,()->congratsText.getText());
     }
 

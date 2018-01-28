@@ -29,7 +29,7 @@ public class GiftStory extends BaseFeature {
           _gift.select_gift();
           _gift.select_friend();
           _gift.send();
-          assertThat(_gift.getButtonName()).isEqualTo("Получить код");// проверяем кнопку "получить код", тк нет возможности двигаться дальше
+          assertThat(_gift.getButtonName()).isEqualTo("Get code");// проверяем кнопку "получить код", тк нет возможности двигаться дальше
     }
 
     @Test

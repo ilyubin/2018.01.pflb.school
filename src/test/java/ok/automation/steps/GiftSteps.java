@@ -1,10 +1,12 @@
 package ok.automation.steps;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.pages.WebElementFacade;
 import ok.automation.pages.GiftConstructorPage;
 import ok.automation.pages.GiftPage;
 import ok.automation.pages.MainPage;
 import ok.automation.tech.extensions.ISteps;
+import org.openqa.selenium.WebElement;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -35,9 +37,14 @@ public class GiftSteps implements ISteps {
         giftConstructorPage.fillTextField(text);
     }
 
+//    @Step
+//    public void select_orange_fontColor(){
+//        giftConstructorPage.selectColor();
+//    }
+
     @Step
-    public void select_orange_fontColor(){
-        giftConstructorPage.selectColor();
+    public void select_font_color(String element){
+        giftConstructorPage.selectColor(element);
     }
 
     @Step

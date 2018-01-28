@@ -2,6 +2,7 @@ package ok.automation.features.gift;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
+import ok.automation.model.GiftCustomStyles;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
 import org.junit.Before;
@@ -36,8 +37,8 @@ public class GiftStory extends BaseFeature {
         _gift.create_own_gift();
         _gift.create_text_gift();
         _gift.select_font_style();
-        //_gift.input_text("Поздравляю");
-        _gift.select_orange_fontColor();
+        _gift.input_text("Поздравляю");
+        _gift.select_font_color(GiftCustomStyles.colors.get(GiftCustomStyles.COLORS.BLACK));
         _gift.complete_gift_creation();
         assertThat(_gift.getCongats()).isEqualTo("Well done! You've just created your own custom gift!");
     }

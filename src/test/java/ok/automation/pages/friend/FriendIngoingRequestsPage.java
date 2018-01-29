@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 @DefaultUrl("https://ok.ru")
 public class FriendIngoingRequestsPage extends PageObject {
 
-    @FindBy(css = "#hook_Loader_UserFriendRequestMRBLoader")
+    @FindBy(id = "hook_Loader_UserFriendRequestMRBLoader")
     private WebElementFacade usersEndlessBlock;
 
     public boolean hasUsers() {

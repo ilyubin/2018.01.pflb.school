@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 @DefaultUrl("https://ok.ru")
 public class FriendPage extends PageObject {
 
-    @FindBy(css = "#hook_Block_MainContainer")
+    @FindBy(id = "hook_Block_MainContainer")
     private WebElementFacade mainContainer;
 
     /* Общие кнопки */

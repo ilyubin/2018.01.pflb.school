@@ -26,7 +26,8 @@ public class FriendStory extends BaseFeature {
     public void search_friend() {
         String friendName = _friend.get_last_friend_name();
         _friend.search_for(friendName);
-        _friend.get_found_friends_names().forEach(name -> assertThat(name).contains(friendName));
+//        _friend.get_found_friends_names().forEach(name -> assertThat(name).contains(friendName));
+        assertThat(_friend.get_found_friends_names()).allMatch(name -> name.contains(friendName));
     }
 
     @Test

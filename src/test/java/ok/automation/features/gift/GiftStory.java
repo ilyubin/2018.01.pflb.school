@@ -1,6 +1,5 @@
 package ok.automation.features.gift;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
@@ -19,8 +18,11 @@ public class GiftStory extends BaseFeature {
         _gift.open_page();
     }
 
-    @Test @Pending
+    @Test
     public void search_gift() {
+        String textSearch = "gift";
+        _gift.search_gift(textSearch);
+        assertThat(_gift.check_result_search_gift()).isEqualTo(true);
     }
 
     @Test

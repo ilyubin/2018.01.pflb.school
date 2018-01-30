@@ -3,25 +3,13 @@ package ok.automation.steps;
 import net.thucydides.core.annotations.Step;
 import ok.automation.pages.GiftConstructorPage;
 import ok.automation.pages.GiftPage;
-import ok.automation.pages.MainPage;
-import ok.automation.pages.TopContentRow;
 import ok.automation.tech.extensions.ISteps;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 
 public class GiftSteps implements ISteps {
 
     GiftPage giftPage;
 
     GiftConstructorPage giftConstructorPage;
-
-    TopContentRow topContentRow;
-
-    @Step
-    public void open_gift_page() {
-        topContentRow.openGiftPage();
-    }
 
     @Step
     public void open_page() {
@@ -36,11 +24,6 @@ public class GiftSteps implements ISteps {
     @Step
     public void create_text_gift(){
         giftConstructorPage.selectTextGift();
-    }
-
-    @Step
-    public void input_text(String text){
-        giftConstructorPage.fillTextField(text);
     }
 
     @Step
@@ -83,5 +66,13 @@ public class GiftSteps implements ISteps {
         return  giftConstructorPage.congrats();
     }
 
+    @Step
+    public void search_gift(String textSearch){
+        giftPage.fillSearchInput(textSearch);
+    }
 
+    @Step
+    public boolean check_result_search_gift() {
+        return giftPage.giftCard();
+    }
 }

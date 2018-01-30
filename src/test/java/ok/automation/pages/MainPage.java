@@ -46,8 +46,7 @@ public class MainPage extends PageObject {
         return post.getText();
     }
 
-//    @FindBy(css=".entity-avatar [srcset]")
-    @FindBy(css="#hook_Block_Avatar a[hrefattrs$=OpenPhoto]")
+    @FindBy(css="a[hrefattrs$=OpenPhoto]")
     private WebElementFacade buttonAvatar;
 
     public void clickAvatar() {

@@ -3,15 +3,19 @@ package ok.automation.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
+import ok.automation.tech.extensions.Helper;
+import org.openqa.selenium.By;
 
 public class GiftConstructorPage extends PageObject {
 
     private String frameId = "appMain_Div";
 
+    private Helper helper = new Helper();
+
     @FindBy(css="li[data-color*='#ff8100']")
     private WebElementFacade color;
 
-    @FindBy(css="#id-text_input']")
+    @FindBy(xpath="//*[@id=\"id-text_input\"]']")
     private WebElementFacade textField;
 
     @FindBy(css="div[data-font_index*='1']")
@@ -26,36 +30,29 @@ public class GiftConstructorPage extends PageObject {
     @FindBy(css=".pts_congrats")
     private WebElementFacade congratsText;
 
-    public void fillTextField(String text){
-        textField.type(text);
+    public void fillTextField(String text) {
+        String js = String.format("document.getElementById('id-text_input').value= \"%s\"",text);
+        helper.doInFrame(frameId, () -> evaluateJavascript(js));
     }
 
-    public void selectColor(){
-        color.click();
+    public void selectColor(String element){
+        helper.doInFrame(frameId, () -> find(By.cssSelector(element)).click());
     }
 
     public void selectFont(){
-        font.click();
+        helper.doInFrame(frameId, () -> font.click());
     }
 
     public void clickGiftReadyButton(){
-        giftReadyButton.click();
+        helper.doInFrame(frameId, () -> giftReadyButton.click());
     }
 
     public void selectTextGift(){
-        getDriver().switchTo().frame(frameId);
-        textGiftIcon.click();
+        helper.doInFrame(frameId, () -> textGiftIcon.click());
     }
 
     public String congrats(){
-        congratsText.waitUntilPresent();
-        return congratsText.getText();
+        return helper.doInFrame(frameId,()->congratsText.getText());
     }
-
-
-
-
-
-
 
 }

@@ -65,10 +65,10 @@ public class MainPage extends PageObject {
         buttonEditAvatar.click();
     }
 
-    @FindBy(css="#hook_Block_Avatar #viewImageLinkId")
+    @FindBy(css="#hook_Block_Avatar a[class=card_wrp]")
     private WebElementFacade photoImage;
 
     public String getPhotoUrl() {
-        return photoImage.getAttribute("src");
+        return photoImage.getAttribute("href");
     }
 }

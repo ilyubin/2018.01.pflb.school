@@ -47,10 +47,6 @@ public class GiftPage extends PageObject {
         giftImg.click();
     }
 
-    public void waitForSearching(){
-        while(waitIcon.isDisplayed());
-    }
-
     public void clickGiftCreationBanner(){
         giftCreationBanner.click();
     }

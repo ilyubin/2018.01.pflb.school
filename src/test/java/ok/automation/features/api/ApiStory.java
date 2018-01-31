@@ -1,22 +1,32 @@
 package ok.automation.features.api;
 
 import io.restassured.response.Response;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.rest.SerenityRest;
+import net.thucydides.core.annotations.Steps;
+import ok.automation.models.group.getCounters.GroupGetCountersResponse;
+import ok.automation.steps.ApiSteps;
+import ok.automation.steps.AvatarSteps;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+@RunWith(SerenityRunner.class)
 public class ApiStory {
+
+    @Steps
+    private ApiSteps _apiSteps;
 
     @Test
     public void get_group_counters() {
-        Response response = SerenityRest.get("https://api.ok.ru/fb.do" +
-                "?application_key=CBAOIFDMEBABABABA" +
-                "&counterTypes=themes" +
-                "&format=json" +
-                "&group_id=54635655856155" +
-                "&method=group.getCounters" +
-                "&sig=e0fbaa256aa62c3f5b760c24daadc6a2" +
-                "&access_token=tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud");
-        System.out.println("statusCode = " + response.statusCode());
-        response.body().prettyPrint();
+        String groupId = "54635655856155";
+        String counterTypes = "themes";
+        Response response = _apiSteps.get_group_counters(groupId,counterTypes);
+        assertThat(response.statusCode()).isEqualTo(200);
+
+        GroupGetCountersResponse r = response.as(GroupGetCountersResponse.class);
+        assertThat(r.counters.themes).isPositive();
+        //System.out.println("statusCode = " + response.statusCode());
     }
 }

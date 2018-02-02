@@ -115,6 +115,7 @@
                         <okLogin>${ok.login}</okLogin>
                         <okPass>${ok.pass}</okPass>
                         <okName>${ok.name}</okName>
+                        <okApplicationKey>${okApplicationKey}</okApplicationKey>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

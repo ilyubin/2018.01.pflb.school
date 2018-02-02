@@ -5,6 +5,7 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
+import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.tech.extensions.HashHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,25 +18,15 @@ public class ApiSteps {
 
     private static final Logger _log = LoggerFactory.getLogger(ApiSteps.class);
     private static final EnvironmentVariables _env = SystemEnvironmentVariables.createEnvironmentVariables();
+    private static final String okApplicationKey = System.getProperty("okApplicationKey");
 
     @Step
-    public Response get_group_counters() {
-        String[] counterTypes = new String[]{
-                "VIDEOS", "THEMES", "SUGGESTED_TOPICS", "SUGGESTED_PRODUCTS",
-                "PROMO_TOPICS_ON_MODERATION", "PRODUCTS", "PRESENTS", "PHOTO_ALBUMS",
-                "PHOTOS", "OWN_PRODUCTS", "MODERATORS", "MEMBERS",
-                "MAYBE", "LINKS", "JOIN_REQUESTS", "DELAYED_TOPICS",
-                "CATALOGS", "BLACK_LIST"
-        };
+    public Response get_group_counters(GroupGetCountersRequest request) {
         Map<String, String> params = new HashMap<>();
-        params.put("group_id", "54635655856155");
+        params.put("group_id", request.groupId);
         params.put("method", "group.getCounters");
-        params.put("counterTypes", mergeElementsForUri(counterTypes));
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
-        return response;
+        params.put("counterTypes", mergeElementsForUri(request.counterTypes));
+        return sendGetRequest(params);
     }
 
     @Step
@@ -65,11 +56,7 @@ public class ApiSteps {
         params.put("uids", mergeElementsForUri("52462642987098", "57407629951036", "53427798343931"));
         params.put("method", "group.getInfo");
         params.put("fields", mergeElementsForUri(fields));
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
-        return response;
+        return sendGetRequest(params);
     }
 
     @Step
@@ -77,11 +64,7 @@ public class ApiSteps {
         Map<String, String> params = new HashMap<>();
         params.put("query", "harrypotter");
         params.put("method", "search.tagMentions");
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
-        return response;
+        return sendGetRequest(params);
     }
 
     @Step
@@ -108,6 +91,10 @@ public class ApiSteps {
         Map<String, String> params = new HashMap<>();
         params.put("method", "users.getCurrentUser");
         params.put("fields", mergeElementsForUri(fields));
+        return sendGetRequest(params);
+    }
+
+    private Response sendGetRequest(Map<String, String> params) {
         String request = getRequestUrl(params);
         _log.info("request  - | {} |", request);
         Response response = SerenityRest.get(request);
@@ -134,10 +121,9 @@ public class ApiSteps {
         String format = "json";
         String sessionSecretKey = "78465ba5b808a28f344d645c6160bb80";
         String accessToken = "tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud";
-        String applicationKey = "CBAOIFDMEBABABABA";
 
         Map<String, String> sortedParams = new TreeMap<>(params);
-        sortedParams.putIfAbsent("application_key", applicationKey);
+        sortedParams.putIfAbsent("application_key", okApplicationKey);
         sortedParams.putIfAbsent("format", format);
         StringBuilder sigSource = new StringBuilder();
         StringBuilder args = new StringBuilder();

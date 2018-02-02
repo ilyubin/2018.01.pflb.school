@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UsersGetCurrentUser extends BaseFeatureApi {
+public class UsersGetCurrentUserStory extends BaseFeatureApi {
 
     @Test
     public void get_current_user() {

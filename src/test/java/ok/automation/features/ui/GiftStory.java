@@ -1,7 +1,7 @@
-package ok.automation.features.gift;
+package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
-import ok.automation.model.GiftCustomStyles;
+import ok.automation.models.GiftCustomStyles;
 import ok.automation.tech.extensions.BaseFeature;
 import ok.automation.steps.GiftSteps;
 import org.junit.Before;

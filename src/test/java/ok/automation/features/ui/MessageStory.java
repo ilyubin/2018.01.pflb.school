@@ -1,4 +1,4 @@
-package ok.automation.features.message;
+package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;

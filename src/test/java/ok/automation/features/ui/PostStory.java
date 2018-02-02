@@ -1,4 +1,4 @@
-package ok.automation.features.post;
+package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
 import ok.automation.tech.extensions.BaseFeature;

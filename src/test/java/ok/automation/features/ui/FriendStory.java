@@ -1,4 +1,4 @@
-package ok.automation.features.friend;
+package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
 import ok.automation.steps.FriendSteps;

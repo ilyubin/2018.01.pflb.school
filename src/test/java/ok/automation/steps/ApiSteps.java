@@ -5,6 +5,9 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
+import ok.automation.models.api.errors.ErrorResponse;
+import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
+import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;
 import ok.automation.tech.extensions.HashHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,29 +16,36 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ApiSteps {
 
     private static final Logger _log = LoggerFactory.getLogger(ApiSteps.class);
     private static final EnvironmentVariables _env = SystemEnvironmentVariables.createEnvironmentVariables();
 
     @Step
-    public Response get_group_counters() {
-        String[] counterTypes = new String[]{
-                "VIDEOS", "THEMES", "SUGGESTED_TOPICS", "SUGGESTED_PRODUCTS",
-                "PROMO_TOPICS_ON_MODERATION", "PRODUCTS", "PRESENTS", "PHOTO_ALBUMS",
-                "PHOTOS", "OWN_PRODUCTS", "MODERATORS", "MEMBERS",
-                "MAYBE", "LINKS", "JOIN_REQUESTS", "DELAYED_TOPICS",
-                "CATALOGS", "BLACK_LIST"
-        };
+    public Response get_group_counters(GroupGetCountersRequest request) {
         Map<String, String> params = new HashMap<>();
-        params.put("group_id", "54635655856155");
+        params.put("group_id", request.groupId);
         params.put("method", "group.getCounters");
-        params.put("counterTypes", mergeElementsForUri(counterTypes));
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        params.put("counterTypes", mergeElementsForUri(request.counterTypes));
+        Response response = sendGetRequest(params);
+        assertThat(response.statusCode()).isEqualTo(200);
         return response;
+    }
+
+    @Step
+    public GroupGetCountersResponse get_group_counters_ok(GroupGetCountersRequest request) {
+        Response response = get_group_counters(request);
+        GroupGetCountersResponse r = response.as(GroupGetCountersResponse.class);
+        return r;
+    }
+
+    @Step
+    public ErrorResponse get_group_counters_error(GroupGetCountersRequest request) {
+        Response response = get_group_counters(request);
+        ErrorResponse r = response.as(ErrorResponse.class);
+        return r;
     }
 
     @Step
@@ -65,10 +75,7 @@ public class ApiSteps {
         params.put("uids", mergeElementsForUri("52462642987098", "57407629951036", "53427798343931"));
         params.put("method", "group.getInfo");
         params.put("fields", mergeElementsForUri(fields));
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        Response response = sendGetRequest(params);
         return response;
     }
 
@@ -77,10 +84,7 @@ public class ApiSteps {
         Map<String, String> params = new HashMap<>();
         params.put("query", "harrypotter");
         params.put("method", "search.tagMentions");
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        Response response = sendGetRequest(params);
         return response;
     }
 
@@ -108,10 +112,7 @@ public class ApiSteps {
         Map<String, String> params = new HashMap<>();
         params.put("method", "users.getCurrentUser");
         params.put("fields", mergeElementsForUri(fields));
-        String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        Response response = sendGetRequest(params);
         return response;
     }
 
@@ -132,9 +133,9 @@ public class ApiSteps {
         String baseUrl = _env.getProperty("api.base_url");
 
         String format = "json";
-        String sessionSecretKey = "78465ba5b808a28f344d645c6160bb80";
-        String accessToken = "tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud";
-        String applicationKey = "CBAOIFDMEBABABABA";
+        String sessionSecretKey = System.getProperty("apiSessionSecretKey");
+        String accessToken = System.getProperty("apiAccessToken");
+        String applicationKey = System.getProperty("apiApplicationKey");
 
         Map<String, String> sortedParams = new TreeMap<>(params);
         sortedParams.putIfAbsent("application_key", applicationKey);
@@ -151,6 +152,14 @@ public class ApiSteps {
         String sig = HashHelper.getMD5(sigSource.toString());
         String url = String.format("%s?%s&sig=%s&access_token=%s", baseUrl, args, sig, accessToken);
         return url;
+    }
+
+    private Response sendGetRequest(Map<String, String> params) {
+        String request = getRequestUrl(params);
+        _log.info("request  - | {} |", request);
+        Response response = SerenityRest.get(request);
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        return response;
     }
 
 }

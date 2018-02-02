@@ -34,7 +34,7 @@ public class AvatarPage extends PageObjectExtension {
     @FindBy(css="[action*=CommentBlock] [id^=field]")
     private WebElementFacade fieldComment;
     public void fillComment(String text) {
-        _scroll(fieldComment);
+        moveToElement(fieldComment);
         fieldComment.type(text);
     }
 
@@ -54,6 +54,6 @@ public class AvatarPage extends PageObjectExtension {
     @FindBy(id="hook_FormButton_button_plpscp_confirm")
     private WebElementFacade buttonOkEditAvatar;
     public void clickOkEditAvatar() {
-        withAction().moveToElement(buttonOkEditAvatar).click().build().perform();
+        moveToElementAndClick(buttonOkEditAvatar);
     }
 }

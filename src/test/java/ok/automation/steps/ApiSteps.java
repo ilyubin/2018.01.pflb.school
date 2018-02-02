@@ -130,24 +130,26 @@ public class ApiSteps {
 
     private String getRequestUrl(Map<String, String> params) {
         String baseUrl = _env.getProperty("api.base_url");
+
+        String format = "json";
         String sessionSecretKey = "78465ba5b808a28f344d645c6160bb80";
         String accessToken = "tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud";
+        String applicationKey = "CBAOIFDMEBABABABA";
+
         Map<String, String> sortedParams = new TreeMap<>(params);
-        sortedParams.putIfAbsent("application_key", "CBAOIFDMEBABABABA");
-        sortedParams.putIfAbsent("format", "json");
+        sortedParams.putIfAbsent("application_key", applicationKey);
+        sortedParams.putIfAbsent("format", format);
         StringBuilder sigSource = new StringBuilder();
         StringBuilder args = new StringBuilder();
         for (Map.Entry<String, String> entry : sortedParams.entrySet()) {
             sigSource.append(entry.getKey()).append('=').append(entry.getValue());
-            if (args.length() > 0) args.append('&');
+            if (args.length() > 0)
+                args.append('&');
             args.append(entry.getKey()).append('=').append(entry.getValue());
         }
         sigSource.append(sessionSecretKey);
         String sig = HashHelper.getMD5(sigSource.toString());
-        String url = String.format(
-                "%s?%s&sig=%s&access_token=%s",
-                baseUrl, args, sig, accessToken
-        );
+        String url = String.format("%s?%s&sig=%s&access_token=%s", baseUrl, args, sig, accessToken);
         return url;
     }
 

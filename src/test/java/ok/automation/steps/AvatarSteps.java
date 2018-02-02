@@ -3,7 +3,7 @@ package ok.automation.steps;
 import ok.automation.pages.AvatarPage;
 import ok.automation.pages.MainPage;
 import net.thucydides.core.annotations.Step;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;

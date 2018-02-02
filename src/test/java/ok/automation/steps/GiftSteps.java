@@ -3,7 +3,7 @@ package ok.automation.steps;
 import net.thucydides.core.annotations.Step;
 import ok.automation.pages.GiftConstructorPage;
 import ok.automation.pages.GiftPage;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 public class GiftSteps implements ISteps {
 

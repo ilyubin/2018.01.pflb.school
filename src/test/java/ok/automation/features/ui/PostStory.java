@@ -1,7 +1,7 @@
 package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
-import ok.automation.tech.extensions.BaseFeature;
+import ok.automation.tech.extensions.BaseFeatureUi;
 import ok.automation.steps.PostSteps;
 import ok.automation.steps.UserSteps;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostStory extends BaseFeature {
+public class PostStory extends BaseFeatureUi {
 
     @Steps
     private PostSteps _post;

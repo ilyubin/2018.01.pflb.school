@@ -2,7 +2,7 @@ package ok.automation.steps;
 
 import net.thucydides.core.annotations.Step;
 import ok.automation.pages.MainPage;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 public class PostSteps implements ISteps {
 

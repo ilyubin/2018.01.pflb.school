@@ -15,9 +15,8 @@ import java.util.TreeMap;
 
 public class ApiSteps {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger("|");
-    private EnvironmentVariables _env =
-            SystemEnvironmentVariables.createEnvironmentVariables();
+    private static final Logger _log = LoggerFactory.getLogger(ApiSteps.class);
+    private static final EnvironmentVariables _env = SystemEnvironmentVariables.createEnvironmentVariables();
 
     @Step
     public Response get_group_counters() {
@@ -33,9 +32,9 @@ public class ApiSteps {
         params.put("method", "group.getCounters");
         params.put("counterTypes", mergeElementsForUri(counterTypes));
         String request = getRequestUrl(params);
-        LOGGER.info("request  - | {} |", request);
+        _log.info("request  - | {} |", request);
         Response response = SerenityRest.get(request);
-        LOGGER.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }
 
@@ -67,9 +66,9 @@ public class ApiSteps {
         params.put("method", "group.getInfo");
         params.put("fields", mergeElementsForUri(fields));
         String request = getRequestUrl(params);
-        LOGGER.info("request  - | {} |", request);
+        _log.info("request  - | {} |", request);
         Response response = SerenityRest.get(request);
-        LOGGER.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }
 
@@ -79,9 +78,9 @@ public class ApiSteps {
         params.put("query", "harrypotter");
         params.put("method", "search.tagMentions");
         String request = getRequestUrl(params);
-        LOGGER.info("request  - | {} |", request);
+        _log.info("request  - | {} |", request);
         Response response = SerenityRest.get(request);
-        LOGGER.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }
 
@@ -110,9 +109,9 @@ public class ApiSteps {
         params.put("method", "users.getCurrentUser");
         params.put("fields", mergeElementsForUri(fields));
         String request = getRequestUrl(params);
-        LOGGER.info("request  - | {} |", request);
+        _log.info("request  - | {} |", request);
         Response response = SerenityRest.get(request);
-        LOGGER.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }
 

@@ -3,13 +3,13 @@ package ok.automation.features.ui;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.steps.FriendSteps;
 import ok.automation.steps.UserSteps;
-import ok.automation.tech.extensions.BaseFeature;
+import ok.automation.tech.extensions.BaseFeatureUi;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FriendStory extends BaseFeature {
+public class FriendStory extends BaseFeatureUi {
 
     @Steps
     private FriendSteps _friend;

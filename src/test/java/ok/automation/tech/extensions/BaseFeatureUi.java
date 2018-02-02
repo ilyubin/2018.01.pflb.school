@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static net.thucydides.core.annotations.ClearCookiesPolicy.Never;
 
 @RunWith(SerenityRunner.class)
-public class BaseFeature {
+public class BaseFeatureUi {
 
     @Managed(clearCookies=Never)
     public WebDriver webdriver;

@@ -5,7 +5,7 @@ import ok.automation.pages.friend.FriendIngoingRequestsPage;
 import ok.automation.pages.friend.FriendOutgoingRequestsPage;
 import ok.automation.pages.friend.FriendPage;
 import ok.automation.pages.friend.FriendSearchPage;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 import java.util.ArrayList;
 import java.util.List;

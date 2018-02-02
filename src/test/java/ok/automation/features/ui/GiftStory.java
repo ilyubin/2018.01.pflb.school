@@ -1,15 +1,15 @@
 package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
-import ok.automation.models.GiftCustomStyles;
-import ok.automation.tech.extensions.BaseFeature;
+import ok.automation.models.ui.GiftCustomStyles;
+import ok.automation.tech.extensions.BaseFeatureUi;
 import ok.automation.steps.GiftSteps;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GiftStory extends BaseFeature {
+public class GiftStory extends BaseFeatureUi {
 
     @Steps
     private GiftSteps _gift;

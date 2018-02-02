@@ -1,4 +1,4 @@
-package ok.automation.models;
+package ok.automation.models.ui;
 
 import java.util.EnumMap;
 

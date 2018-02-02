@@ -1,9 +1,7 @@
 package ok.automation.features.ui;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import ok.automation.steps.UserSteps;
-import ok.automation.tech.extensions.BaseFeature;
+import ok.automation.tech.extensions.BaseFeatureUi;
 import ok.automation.steps.AvatarSteps;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +10,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AvatarStory extends BaseFeature {
+public class AvatarStory extends BaseFeatureUi {
 
     @Steps
     private AvatarSteps _avatar;

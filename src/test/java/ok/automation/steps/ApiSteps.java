@@ -130,10 +130,10 @@ public class ApiSteps {
 
     private String getRequestUrl(Map<String, String> params) {
         String baseUrl = _env.getProperty("api.base_url");
-        String sessionSecretKey = "78465ba5b808a28f344d645c6160bb80";
-        String accessToken = "tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud";
+        String sessionSecretKey = System.getProperty("apiSSK"); // "78465ba5b808a28f344d645c6160bb80";
+        String accessToken = System.getProperty("apiAccessToken"); // "tkn1YX95MI8gXZC4fjRUV1pfsRyR5ydwyuT3fspvrOefLoqfYWs2nNFeQQnyxUgxAACud";
         Map<String, String> sortedParams = new TreeMap<>(params);
-        sortedParams.putIfAbsent("application_key", "CBAOIFDMEBABABABA");
+        sortedParams.putIfAbsent("application_key", System.getProperty("apiAppKey")); // "CBAOIFDMEBABABABA");
         sortedParams.putIfAbsent("format", "json");
         StringBuilder sigSource = new StringBuilder();
         StringBuilder args = new StringBuilder();

@@ -115,6 +115,9 @@
                         <okLogin>${ok.login}</okLogin>
                         <okPass>${ok.pass}</okPass>
                         <okName>${ok.name}</okName>
+                        <apiSSK>${api.ssk}</apiSSK>
+                        <apiAccessToken>${api.accessToken}</apiAccessToken>
+                        <apiAppKey>${api.appKey}</apiAppKey>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -40,9 +40,8 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String avatarComment() {
-        String post = avatarPage.getAvatarComment();
-        return post;
+    public String comment() {
+        return avatarPage.getLastComment();
     }
 
     @Step
@@ -50,5 +49,10 @@ public class AvatarSteps implements ISteps {
         mainPage.hoverToAvatar();
         mainPage.clickEditAvatar();
         avatarPage.clickOkEditAvatar();
+    }
+
+    @Step
+    public String photoUrl() {
+        return mainPage.getPhotoUrl();
     }
 }

@@ -71,5 +71,13 @@ public class GiftSteps implements ISteps {
         return  giftConstructorPage.congrats();
     }
 
+    @Step
+    public void search_gift(String textSearch){
+        giftPage.fillSearchInput(textSearch);
+    }
 
+    @Step
+    public boolean check_result_search_gift() {
+        return giftPage.giftCard();
+    }
 }

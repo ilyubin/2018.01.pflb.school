@@ -1,18 +1,15 @@
 package ok.automation.pages;
 
-import com.google.common.base.Supplier;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.pages.PageObject;
-
-import java.util.function.BiPredicate;
+import ok.automation.tech.extensions.PageObjectExtension;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @DefaultUrl("/gifts")
-public class GiftPage extends PageObject {
-
-    @FindBy(css="#gf-search-input")
-    private WebElementFacade searchInputField;
+public class GiftPage extends PageObjectExtension {
 
     @FindBy(css=".gift_a")
     private WebElementFacade giftImg;
@@ -35,13 +32,14 @@ public class GiftPage extends PageObject {
     @FindBy(css=".button-pro_tx")
     private WebElementFacade getCodeButton;
 
-    public void fillSearchFiled(String text) {
-        searchInputField.type(text);
-    }
+    @FindBy(id="gf-search-input")
+    private WebElementFacade searchInput;
 
-    public String getFoundGiftInfo(){
-        return giftImg.getAttribute("href");
-    }
+    @FindBy(id="gf-search-lupa")
+    private WebElementFacade searchButton;
+
+    @FindBy(css="#hook_Block_GiftsFrontContentRBx>.gift-front_cnt>.__search")
+    private WebElementFacade giftResultSearch;
 
     public void giftImgClick(){
         giftImg.click();
@@ -62,7 +60,13 @@ public class GiftPage extends PageObject {
         return getCodeButton.getText();
     }
 
+    public void fillSearchInput(String textSearch) {
+        searchInput.type(textSearch);
+    }
 
-
-
+    public boolean giftCard() {
+        WebDriverWait driverWait = new WebDriverWait(getDriver(), 5); //TODO How does this line take away in PageObjectExtension.java?
+        driverWait.until(ExpectedConditions.visibilityOf(giftResultSearch));
+        return true;
+    }
 }

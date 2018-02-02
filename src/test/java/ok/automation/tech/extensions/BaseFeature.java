@@ -20,7 +20,7 @@ import static net.thucydides.core.annotations.ClearCookiesPolicy.Never;
 public class BaseFeature {
 
     @Managed(clearCookies=Never)
-    public WebDriver webdriver;
+    public WebDriver webdriver; //TODO Why is it here but it never used?
 
     protected String okLogin = System.getProperty("okLogin");
     protected String okPass = System.getProperty("okPass");

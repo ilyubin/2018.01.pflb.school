@@ -228,3 +228,5 @@ public class PurposeSteps implements ISteps {
 - `assertj` http://joel-costigliola.github.io/assertj/
 - how to `git` https://githowto.com/ru
 - locators table http://www.cheat-sheets.org/saved-copy/Locators_table_1_0_2.pdf
+- how to `css` http://flukeout.github.io/
+- `rest-assured` http://rest-assured.io/

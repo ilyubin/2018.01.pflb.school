@@ -3,14 +3,21 @@ package ok.automation.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import ok.automation.tech.extensions.PageObjectExtension;
+import org.openqa.selenium.ElementNotVisibleException;
 
 public class AvatarPage extends PageObjectExtension {
 
     @FindBy(id="plp_descrChgLnk")
-//    @FindBy(css="#plp_descrAddLnk") // TODO fix for first time add description
+    private WebElementFacade buttonChangeDescription;
+    @FindBy(id="plp_descrAddLnk")
     private WebElementFacade buttonAddDescription;
     public void clickAddDescription() {
-        buttonAddDescription.click();
+        try {
+            buttonChangeDescription.click();
+        }
+        catch (ElementNotVisibleException e) {
+            buttonAddDescription.click();
+        }
     }
 
     @FindBy(css="[data-too-long-msg]")

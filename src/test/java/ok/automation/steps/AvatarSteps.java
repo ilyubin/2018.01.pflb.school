@@ -27,7 +27,7 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String avatarDescription() {
+    public String description() {
         String post = avatarPage.getAvatarDescription();
         return post;
     }

@@ -24,7 +24,7 @@ public class AvatarStory extends BaseFeatureUi {
     public void add_a_description() {
         String text = fake.lorem().sentence();
         _avatar.create_text_description(text);
-        assertThat(_avatar.avatarDescription()).isEqualTo(text);
+        assertThat(_avatar.description()).isEqualTo(text);
     }
 
     @Test

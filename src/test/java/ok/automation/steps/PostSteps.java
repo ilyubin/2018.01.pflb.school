@@ -21,7 +21,7 @@ public class PostSteps implements ISteps {
     }
 
     @Step
-    public String last() {
+    public String get_last_post_from_main_page() {
         mainPage.open();
         return mainPage.getLastPost();
     }

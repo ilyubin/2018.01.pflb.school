@@ -27,7 +27,7 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String description() {
+    public String get_avatar_description() {
         String post = avatarPage.getAvatarDescription();
         return post;
     }
@@ -40,7 +40,7 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String comment() {
+    public String get_last_avatar_comment() {
         return avatarPage.getLastComment();
     }
 
@@ -52,7 +52,7 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String photoUrl() {
+    public String get_photoUrl() {
         return mainPage.getPhotoUrl();
     }
 }

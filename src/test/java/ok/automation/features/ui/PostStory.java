@@ -26,6 +26,6 @@ public class PostStory extends BaseFeatureUi {
     public void create_text_post() {
         String text = fake.lorem().sentence();
         _post.create_text_post(text);
-        assertThat(_post.last()).isEqualTo(text);
+        assertThat(_post.get_last_post_from_main_page()).isEqualTo(text);
     }
 }

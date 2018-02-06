@@ -24,20 +24,20 @@ public class AvatarStory extends BaseFeatureUi {
     public void add_a_description() {
         String text = fake.lorem().sentence();
         _avatar.create_text_description(text);
-        assertThat(_avatar.description()).isEqualTo(text);
+        assertThat(_avatar.get_avatar_description()).isEqualTo(text);
     }
 
     @Test
     public void add_comment() {
         String text = String.format("Comment-%s", UUID.randomUUID());
         _avatar.create_text_comment(text);
-        assertThat(_avatar.comment()).isEqualTo(text);
+        assertThat(_avatar.get_last_avatar_comment()).isEqualTo(text);
     }
 
     @Test
     public void edit_photo_without_changes() {
-        String url = _avatar.photoUrl();
+        String url = _avatar.get_photoUrl();
         _avatar.edit_photo();
-        assertThat(_avatar.photoUrl()).isEqualTo(url);
+        assertThat(_avatar.get_photoUrl()).isEqualTo(url);
     }
 } 

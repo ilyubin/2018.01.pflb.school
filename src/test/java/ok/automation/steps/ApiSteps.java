@@ -116,6 +116,21 @@ public class ApiSteps {
         return response;
     }
 
+    @Step
+    public Response get_call_left() {
+        String request = "https://api.ok.ru/fb.do" +
+                "?application_key=CBAEHQDMEBABABABA" +
+                "&format=json" +
+                "&method=users.getCallsLeft" +
+                "&methods=users.getCallsLeft" +
+                "&sig=ae829b9b24c8a71e18890dc3c58b4a6d" +
+                "&access_token=tkn1gbUo3a4XnEusQuPL7gIiIvYvzg6xtLJV0sPChsOx08jYUT5pshTUQs6pfQyTGVK4e";
+        _log.info("request - | {} |", request);
+        Response response = SerenityRest.get(request);
+        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        return response;
+    }
+
     private String mergeElementsForUri(String... elements) {
         return mergeArray(",", elements);
     }

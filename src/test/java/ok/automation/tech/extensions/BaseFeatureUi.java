@@ -12,12 +12,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static net.thucydides.core.annotations.ClearCookiesPolicy.Never;
 
 @RunWith(SerenityRunner.class)
-public class BaseFeature {
+public class BaseFeatureUi {
 
     @Managed(clearCookies=Never)
     public WebDriver webdriver;
@@ -35,6 +36,7 @@ public class BaseFeature {
 
     @Before
     public void setUp() {
+        webdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         if (_setUpIsDone)
             return;
         _user.open_login_page();

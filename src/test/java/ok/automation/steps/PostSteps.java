@@ -2,7 +2,7 @@ package ok.automation.steps;
 
 import net.thucydides.core.annotations.Step;
 import ok.automation.pages.MainPage;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 public class PostSteps implements ISteps {
 
@@ -21,7 +21,7 @@ public class PostSteps implements ISteps {
     }
 
     @Step
-    public String last() {
+    public String get_last_post_from_main_page() {
         mainPage.open();
         return mainPage.getLastPost();
     }

@@ -1,6 +1,6 @@
-package ok.automation.model;
+package ok.automation.models.ui;
 
-import java.util.*;
+import java.util.EnumMap;
 
 public class GiftCustomStyles {
 
@@ -22,5 +22,4 @@ public class GiftCustomStyles {
         colors.put(COLORS.BLUE, ".__nine");
         colors.put(COLORS.WHITE, ".__ten");
     }
-
 }

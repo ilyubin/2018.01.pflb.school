@@ -3,7 +3,7 @@ package ok.automation.steps;
 import ok.automation.pages.AvatarPage;
 import ok.automation.pages.MainPage;
 import net.thucydides.core.annotations.Step;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -27,7 +27,7 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String avatarDescription() {
+    public String get_avatar_description() {
         String post = avatarPage.getAvatarDescription();
         return post;
     }
@@ -40,9 +40,8 @@ public class AvatarSteps implements ISteps {
     }
 
     @Step
-    public String avatarComment() {
-        String post = avatarPage.getAvatarComment();
-        return post;
+    public String get_last_avatar_comment() {
+        return avatarPage.getLastComment();
     }
 
     @Step
@@ -50,5 +49,10 @@ public class AvatarSteps implements ISteps {
         mainPage.hoverToAvatar();
         mainPage.clickEditAvatar();
         avatarPage.clickOkEditAvatar();
+    }
+
+    @Step
+    public String get_photoUrl() {
+        return mainPage.getPhotoUrl();
     }
 }

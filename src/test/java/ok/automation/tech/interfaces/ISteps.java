@@ -1,4 +1,4 @@
-package ok.automation.tech.extensions;
+package ok.automation.tech.interfaces;
 
 import net.thucydides.core.annotations.Step;
 

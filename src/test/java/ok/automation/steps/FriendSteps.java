@@ -1,17 +1,20 @@
 package ok.automation.steps;
 
 import net.thucydides.core.annotations.Step;
+import ok.automation.models.ui.User;
+import ok.automation.pages.SearchPage;
 import ok.automation.pages.friend.FriendIngoingRequestsPage;
 import ok.automation.pages.friend.FriendOutgoingRequestsPage;
 import ok.automation.pages.friend.FriendPage;
 import ok.automation.pages.friend.FriendSearchPage;
-import ok.automation.tech.extensions.ISteps;
+import ok.automation.tech.interfaces.ISteps;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FriendSteps implements ISteps {
 
+    SearchPage searchPage;
     FriendPage friendPage;
     FriendSearchPage friendSearch;
     FriendOutgoingRequestsPage outgoingRequests;
@@ -19,26 +22,24 @@ public class FriendSteps implements ISteps {
 
     @Step
     public void open_page() {
+        friendPage.open();
         friendPage.openPage();
     }
 
-    /* Главная страница */
-
-    @Step
-    public String get_first_friend_name() {
-        return friendPage.getFirstFriendName();
-    }
-
-    @Step
-    public String get_last_friend_name() {
-        return friendPage.getLastFriendName();
-    }
-
-    /* Поиск среди друзей по имени */
-
     @Step
     public void search_for(String searchRequest) {
+        friendPage.openPage();
         friendSearch.searchFor(searchRequest);
+    }
+
+    @Step
+    public void search_for(User friend) {
+        if(friend.fullName.isEmpty()){
+            friendPage.openPage();
+            friendPage.switchLetterFilter("#");
+        }else {
+            search_for(friend.fullName);
+        }
     }
 
     @Step
@@ -52,11 +53,51 @@ public class FriendSteps implements ISteps {
     }
 
     @Step
-    public String add_first_found_user_to_friends_and_get_id() {
-        if (friendSearch.hasUsers() && friendSearch.canAddAnyUserToFriends()) {
-            return friendSearch.addFirstUserAndGetId();
+    public User get_first_friend_with_name() {
+        User friend = new User();
+        friend.fullName = friendPage.getFirstFriendWithNameName();
+        friend.id = friendPage.getFirstFriendWithNameUserId();
+        return friend;
+    }
+
+    @Step
+    public User get_non_friend_user_by_name(String name) {
+        searchPage.open();
+        searchPage.searchFor(name);
+        User user = new User();
+        user.fullName = searchPage.getFirstNonFriendUserName();
+        user.id = searchPage.getFirstNonFriendUserId();
+        return user;
+    }
+
+    @Step
+    public void add_user_to_friends(User user) {
+        friendPage.addUserToFriendsById(user.id);
+    }
+
+    @Step
+    public String get_user_name_in_outgoing_requests_by_id(String userId) {
+        friendPage.openPage();
+        outgoingRequests.openPage();
+        if (outgoingRequests.hasUserWithId(userId)) {
+            return outgoingRequests.getUserNameById(userId);
         }
         return null;
+    }
+
+    @Step
+    public User get_first_user_in_ingoing_requests() {
+        friendPage.openPage();
+        ingoingRequests.openPage();
+        User user = new User();
+        user.id = ingoingRequests.getFirstUserId();
+        user.fullName = ingoingRequests.getFirstUserName();
+        return user;
+    }
+
+    @Step
+    public void accept_user_ingoing_request(User user) {
+        ingoingRequests.acceptUserWithId(user.id);
     }
 
     @Step
@@ -64,47 +105,5 @@ public class FriendSteps implements ISteps {
         return friendSearch.getFriendNameOnPageById(userId);
     }
 
-    /* Исходящие заявки OutRequests */
-
-    @Step
-    public void open_outgoing_requests_page() {
-        friendPage.openOutgoingRequestsPage();
-    }
-
-    @Step
-    public String get_user_name_in_friends_out_requests_by_id(String userId) {
-        if (outgoingRequests.hasUsers() && outgoingRequests.hasUserWithId(userId)) {
-            return outgoingRequests.getUserNameById(userId);
-        }
-        return null;
-    }
-
-    /* Исходящие заявки InRequests*/
-
-    @Step
-    public void open_in_requests_page() {
-        friendPage.openIngoingRequestsPage();
-    }
-
-    @Step
-    public String get_first_user_name_in_ingoing_requests() {
-        if (ingoingRequests.hasUsers()) {
-            return ingoingRequests.getFirstUserName();
-        }
-        return null;
-    }
-
-    @Step
-    public String get_first_user_id_in_ingoing_requests() {
-        if (ingoingRequests.hasUsers()) {
-            return ingoingRequests.getFirstUserId();
-        }
-        return null;
-    }
-
-    @Step
-    public void accept_ingoing_request_with_user_id(String userId) {
-        ingoingRequests.acceptUserWithId(userId);
-    }
 
 }

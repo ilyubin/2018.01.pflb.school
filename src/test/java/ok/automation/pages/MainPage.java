@@ -42,7 +42,7 @@ public class MainPage extends PageObject {
     }
 
     public String _getPostByIndex(int index) {
-        WebElementFacade post = findBy(String.format("#hook_Block_MainFeedsContent .feed-w:nth-of-type(%s) .media-text_cnt", index + 3));
+        WebElementFacade post = findBy(String.format("#hook_Block_MainFeedsContent .feed-w:nth-of-type(%s) .media-text_cnt", index + 2));
         return post.getText();
     }
 
@@ -62,5 +62,12 @@ public class MainPage extends PageObject {
 
     public void clickEditAvatar() {
         buttonEditAvatar.click();
+    }
+
+    @FindBy(css="#hook_Block_Avatar a[class=card_wrp]")
+    private WebElementFacade photoImage;
+
+    public String getPhotoUrl() {
+        return photoImage.getAttribute("href");
     }
 }

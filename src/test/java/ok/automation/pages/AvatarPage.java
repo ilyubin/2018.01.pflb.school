@@ -3,14 +3,21 @@ package ok.automation.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import ok.automation.tech.extensions.PageObjectExtension;
+import org.openqa.selenium.ElementNotVisibleException;
 
 public class AvatarPage extends PageObjectExtension {
 
     @FindBy(id="plp_descrChgLnk")
-//    @FindBy(css="#plp_descrAddLnk") // TODO fix for first time add description
+    private WebElementFacade buttonChangeDescription;
+    @FindBy(id="plp_descrAddLnk")
     private WebElementFacade buttonAddDescription;
     public void clickAddDescription() {
-        buttonAddDescription.click();
+        try {
+            buttonChangeDescription.click();
+        }
+        catch (ElementNotVisibleException e) {
+            buttonAddDescription.click();
+        }
     }
 
     @FindBy(css="[data-too-long-msg]")
@@ -34,7 +41,7 @@ public class AvatarPage extends PageObjectExtension {
     @FindBy(css="[action*=CommentBlock] [id^=field]")
     private WebElementFacade fieldComment;
     public void fillComment(String text) {
-        _scroll(fieldComment);
+        moveToElement(fieldComment);
         fieldComment.type(text);
     }
 
@@ -47,13 +54,13 @@ public class AvatarPage extends PageObjectExtension {
 
     @FindBy(xpath="//div[@class='comments_lst_cnt']/div[last()]//div[@class='comments_text textWrap']")
     private WebElementFacade avatarComment;
-    public String getAvatarComment() {
+    public String getLastComment() {
         return avatarComment.getText();
     }
 
     @FindBy(id="hook_FormButton_button_plpscp_confirm")
     private WebElementFacade buttonOkEditAvatar;
     public void clickOkEditAvatar() {
-        buttonOkEditAvatar.click();
+        moveToElementAndClick(buttonOkEditAvatar);
     }
 }

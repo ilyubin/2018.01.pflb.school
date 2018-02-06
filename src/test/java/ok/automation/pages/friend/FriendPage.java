@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @DefaultUrl("https://ok.ru")
 public class FriendPage extends PageObject {
@@ -13,48 +14,46 @@ public class FriendPage extends PageObject {
     @FindBy(id = "hook_Block_MainContainer")
     private WebElementFacade mainContainer;
 
-    /* Общие кнопки */
-
     @FindBy(css = "#hook_Block_HeaderTopFriendsInToolbar a")
     private WebElementFacade friendsHeaderButton;
 
     public void openPage() {
         friendsHeaderButton.click();
+        waitForLoading();
     }
 
-    @FindBy(css = ".nav-side a[hrefattrs*=OnlineFriends]")
-    private WebElementFacade friendsOnlineButton;
-
-    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*='OutgoingFriendRequests']")
-    private WebElementFacade friendsOutgoingRequestsButton;
-
-    public void openOutgoingRequestsPage() {
-        withAction().moveToElement(mainContainer).click(friendsOutgoingRequestsButton).build().perform();
+    public void waitForLoading(){
+        By by = By.xpath("//div[@id='hook_Block_NavigationProgressBar']//div[@role='progressbar']");
+        waitFor(ExpectedConditions.attributeContains(by, "class", "__complete"));
     }
-
-    @FindBy(css = "#hook_Block_UserFriendsCatalogRB [hrefattrs*='userFriendRequest']")
-    private WebElementFacade friendsIngoingRequestsButton;
-
-    public void openIngoingRequestsPage() {
-        withAction().moveToElement(mainContainer).click(friendsIngoingRequestsButton).build().perform();
-    }
-
-    /* Главная страница */
 
     @FindBy(id = "hook_Loader_MyFriendsSquareCardsPagingBLoader")
-    private WebElementFacade welcomeFriendBlock;
+    private WebElementFacade friendsGrid;
 
-    public String getFirstFriendName() {
-        return welcomeFriendBlock.find(By.xpath("(*//a[@class='o'])[1]")).getText();
+    private WebElementFacade getFirstFriendWithName() {
+        return friendsGrid.find(By.xpath("(ul/li/div[descendant::a[contains(@class, 'o') and text() and not(text() = ' ')]])[1]"));
     }
 
-    public String getLastFriendName() {
-        return welcomeFriendBlock.find(By.xpath("(*//a[@class='o'])[last()]")).getText();
+    public String getFirstFriendWithNameName() {
+        return getFirstFriendWithName().find(By.cssSelector("a.o")).getText();
     }
 
-    /* Полезные методы */
+    public String getFirstFriendWithNameUserId() {
+        return getFirstFriendWithName().find(By.cssSelector("span[data-id]")).getAttribute("data-id");
+    }
 
-    static boolean hasAnyElementInEndlessBlock(Actions actions, WebElementFacade endlessBlock, By elementSelector) {
+    public void switchLetterFilter(String letter){
+        By by = By.xpath(String.format("//div[contains(@class, 'filter')]/a[text()='%s']", letter));
+        find(by).click();
+        waitFor(ExpectedConditions.attributeContains(by, "class", "__active"));
+    }
+
+    public void addUserToFriendsById(String userId) {
+        String xpath = String.format("//a[contains(@href, 'id=%s') and contains(@href, 'cmd=AddFriendButton')]", userId);
+        find(By.xpath(xpath)).click();
+    }
+
+    public static boolean hasAnyElementInEndlessBlock(Actions actions, WebElementFacade endlessBlock, By elementSelector) {
         int pageBefore = Integer.parseInt(endlessBlock.getAttribute("data-page"));
         int pageAfter = 0;
         boolean containsElement = endlessBlock.containsElements(elementSelector);

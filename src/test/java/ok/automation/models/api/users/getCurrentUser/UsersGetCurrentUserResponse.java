@@ -1,6 +1,8 @@
 package ok.automation.models.api.users.getCurrentUser;
 
-public class UsersGetCurrentUserResponse {
+import ok.automation.tech.extensions.BaseModel;
+
+public class UsersGetCurrentUserResponse extends BaseModel {
     public Boolean accessible;
     public Integer age;
     public Boolean allows_anonym_access;

@@ -1,0 +1,1 @@
+mvn clean verify -DokLogin="***" -DokPass="***" -DokName="Jhon McClain" -DapiApplicationKey="***" -DapiSessionSecretKey="***" -DapiAccessToken="***"

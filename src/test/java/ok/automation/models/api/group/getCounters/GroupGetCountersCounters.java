@@ -1,6 +1,8 @@
 package ok.automation.models.api.group.getCounters;
 
-public class GroupGetCountersCounters {
+import ok.automation.tech.extensions.BaseModel;
+
+public class GroupGetCountersCounters extends BaseModel {
     public Integer black_list;
     public Integer catalogs;
     public Integer delayed_topics;

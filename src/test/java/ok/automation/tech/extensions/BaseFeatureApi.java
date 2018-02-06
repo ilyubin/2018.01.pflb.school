@@ -9,9 +9,6 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class BaseFeatureApi {
 
-    protected String okApplicationKey = System.getProperty("okApplicationKey");
-    // TODO
-
     protected Faker fake = new Faker();
 
     @Steps

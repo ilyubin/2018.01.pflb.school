@@ -1,8 +1,8 @@
 package ok.automation.models.ui;
 
-public class User {
+import ok.automation.tech.extensions.BaseModel;
 
+public class User extends BaseModel {
     public String fullName;
     public String id;
-
 }

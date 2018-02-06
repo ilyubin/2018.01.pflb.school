@@ -1,6 +1,8 @@
 package ok.automation.models.api.search.tagMentions;
 
-public class SearchTagMentionsResponse {
+import ok.automation.tech.extensions.BaseModel;
+
+public class SearchTagMentionsResponse extends BaseModel {
     public Integer all;
     public Integer groupPhotos;
     public Integer groupTopics;

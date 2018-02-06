@@ -1,6 +1,8 @@
 package ok.automation.features.api;
 
-import io.restassured.response.Response;
+import ok.automation.factories.api.GroupGetInfoFactory;
+import ok.automation.models.api.group.getInfo.GroupGetInfoRequest;
+import ok.automation.models.api.group.getInfo.GroupGetInfoResponse;
 import ok.automation.tech.extensions.BaseFeatureApi;
 import org.junit.Test;
 
@@ -12,9 +14,8 @@ public class GroupGetInfoStory extends BaseFeatureApi {
 
     @Test
     public void get_group_info() {
-        Response response = api.get_group_info();
-        assertThat(response.statusCode()).isEqualTo(200);
-        List<String> names = response.path("name");
-        assertThat(names).containsExactly("Гифки", "Рамблер", "ТСВ");
+        GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
+        GroupGetInfoResponse response = api.get_group_info_ok(request);
+
     }
 }

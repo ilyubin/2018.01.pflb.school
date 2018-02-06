@@ -1,6 +1,5 @@
 package ok.automation.features.api;
 
-import io.restassured.response.Response;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;

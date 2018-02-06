@@ -5,9 +5,12 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
+import ok.automation.models.api.ApiRequest;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;
+import ok.automation.models.api.group.getInfo.GroupGetInfoRequest;
+import ok.automation.models.api.group.getInfo.GroupGetInfoResponse;
 import ok.automation.tech.extensions.HashHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +28,11 @@ public class ApiSteps {
 
     @Step
     public Response get_group_counters(GroupGetCountersRequest request) {
-        Map<String, String> params = new HashMap<>();
-        params.put("group_id", request.groupId);
-        params.put("method", "group.getCounters");
-        params.put("counterTypes", mergeElementsForUri(request.counterTypes));
-        Response response = sendGetRequest(params);
+        ApiRequest apiRequest = new ApiRequest();
+        apiRequest.addParameter("group_id", request.groupId);
+        apiRequest.addParameter("counterTypes", request.counterTypes);
+        apiRequest.addParameter("method", "group.getCounters");
+        Response response = apiRequest.send();
         assertThat(response.statusCode()).isEqualTo(200);
         return response;
     }
@@ -49,34 +52,29 @@ public class ApiSteps {
     }
 
     @Step
-    public Response get_group_info() {
-        String[] fields = new String[]{
-                "ABBREVIATION", "ACCESS_TYPE", "ADDRESS", "ADD_PHOTOALBUM_ALLOWED",
-                "ADD_THEME_ALLOWED", "ADD_VIDEO_ALLOWED", "ADMIN_ID", "ADVANCED_PUBLICATION_ALLOWED",
-                "AGE_RESTRICTED", "BLOCKED", "BUSINESS", "CATALOG_CREATE_ALLOWED",
-                "CATEGORY", "CHANGE_AVATAR_ALLOWED", "CHANGE_TYPE_ALLOWED", "CITY",
-                "COMMENT_AS_OFFICIAL", "COMMUNITY", "CONTENT_AS_OFFICIAL", "COUNTRY",
-                "CREATED_MS", "DELETE_ALLOWED", "DESCRIPTION", "EDIT_ALLOWED",
-                "END_DATE", "FEED_SUBSCRIPTION", "FRIENDS_COUNT", "GRADUATE_YEAR",
-                "HOMEPAGE_NAME", "HOMEPAGE_URL", "INVITATION_SENT", "INVITE_ALLOWED",
-                "JOIN_ALLOWED", "LEAVE_ALLOWED", "LOCATION_ID", "LOCATION_LATITUDE",
-                "LOCATION_LONGITUDE", "LOCATION_ZOOM", "MAIN_PAGE_TAB", "MAIN_PHOTO",
-                "MANAGE_MEMBERS", "MEMBERS_COUNT", "MESSAGES_ALLOWED", "MESSAGING_ALLOWED",
-                "MIN_AGE", "NAME", "NOTIFICATIONS_SUBSCRIPTION", "PARTNER_PROGRAM_ALLOWED",
-                "PARTNER_PROGRAM_STATUS", "PENALTY_POINTS_ALLOWED", "PHONE", "PHOTOS_TAB_HIDDEN",
-                "PHOTO_ID", "PIC_AVATAR", "POSSIBLE_MEMBERS_COUNT", "PREMIUM", "PRIVATE",
-                "PRODUCTS_TAB_HIDDEN", "PRODUCT_CREATE_ALLOWED", "PRODUCT_CREATE_SUGGESTED_ALLOWED",
-                "PRODUCT_CREATE_ZERO_LIFETIME_ALLOWED", "PROMO_THEME_ALLOWED", "PUBLISH_DELAYED_THEME_ALLOWED",
-                "REF", "REQUEST_SENT", "SCOPE_ID", "SHOP_VISIBLE_ADMIN", "SHOP_VISIBLE_PUBLIC",
-                "SHORTNAME", "START_DATE", "STATS_ALLOWED", "STATUS", "SUBCATEGORY_ID", "SUGGEST_THEME_ALLOWED",
-                "TRANSFERS_ALLOWED", "UID", "VIDEO_TAB_HIDDEN", "YEAR_FROM", "YEAR_TO"
-        };
-        Map<String, String> params = new HashMap<>();
-        params.put("uids", mergeElementsForUri("52462642987098", "57407629951036", "53427798343931"));
-        params.put("method", "group.getInfo");
-        params.put("fields", mergeElementsForUri(fields));
-        Response response = sendGetRequest(params);
+    public Response get_group_info(GroupGetInfoRequest request) {
+        ApiRequest apiRequest = new ApiRequest();
+        apiRequest.addParameter("uids", request.uids);
+        apiRequest.addParameter("move_to_top", request.move_to_top);
+        apiRequest.addParameter("fields", request.fields);
+        apiRequest.addParameter("method", "group.getInfo");
+        Response response = apiRequest.send();
+        assertThat(response.statusCode()).isEqualTo(200);
         return response;
+    }
+
+    @Step
+    public GroupGetInfoResponse get_group_info_ok(GroupGetInfoRequest request) {
+        Response response = get_group_info(request);
+        GroupGetInfoResponse r = response.as(GroupGetInfoResponse.class);
+        return r;
+    }
+
+    @Step
+    public ErrorResponse get_group_info_error(GroupGetInfoRequest request) {
+        Response response = get_group_info(request);
+        ErrorResponse r = response.as(ErrorResponse.class);
+        return r;
     }
 
     @Step
@@ -84,6 +82,11 @@ public class ApiSteps {
         Map<String, String> params = new HashMap<>();
         params.put("query", "harrypotter");
         params.put("method", "search.tagMentions");
+        params.put("filter", "{" +
+                "\"since\":\"1990-05-30 00:00:00\"," +
+                "\"types\":[\"USER_TOPIC\", \"USER_PHOTO\", \"USER_VIDEO\", \"GROUP_TOPIC\", \"GROUP_PHOTO\", \"GROUP_VIDEO\"]," +
+                "\"until\":\"2017-05-30 00:00:00\"" +
+                "}");
         Response response = sendGetRequest(params);
         return response;
     }

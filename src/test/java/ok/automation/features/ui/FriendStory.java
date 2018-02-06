@@ -1,8 +1,8 @@
 package ok.automation.features.ui;
 
 import net.thucydides.core.annotations.Steps;
+import ok.automation.models.ui.User;
 import ok.automation.steps.FriendSteps;
-import ok.automation.steps.UserSteps;
 import ok.automation.tech.extensions.BaseFeatureUi;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +14,6 @@ public class FriendStory extends BaseFeatureUi {
     @Steps
     private FriendSteps _friend;
 
-    @Steps
-    private UserSteps _user;
-
     @Before
     public void open_friend_page() {
         _friend.open_page();
@@ -24,29 +21,26 @@ public class FriendStory extends BaseFeatureUi {
 
     @Test
     public void search_friend() {
-        String friendName = _friend.get_last_friend_name();
-        _friend.search_for(friendName);
-//        _friend.get_found_friends_names().forEach(name -> assertThat(name).contains(friendName));
-        assertThat(_friend.get_found_friends_names()).allMatch(name -> name.contains(friendName));
+        User friend = _friend.get_first_friend_with_name();
+        _friend.search_for(friend);
+        assertThat(_friend.get_found_friends_names()).allMatch(name -> name.contains(friend.fullName));
     }
 
     @Test
-    public void send_request_to_friend() {
-        String request = "Harry Potter";
-        _friend.search_for(request);
-        String userId = _friend.add_first_found_user_to_friends_and_get_id();
-        _friend.open_outgoing_requests_page();
-        assertThat(request).isEqualToIgnoringCase(_friend.get_user_name_in_friends_out_requests_by_id(userId));
+    public void send_friend_request_to_user() {
+        String name = "ив";
+        User user = _friend.get_non_friend_user_by_name(name);
+        _friend.add_user_to_friends(user);
+        assertThat(_friend.get_user_name_in_outgoing_requests_by_id(user.id))
+                .containsIgnoringCase(name)
+                .containsIgnoringCase(user.fullName);
     }
 
     @Test
     public void accept_friend_request() {
-        _friend.open_in_requests_page();
-        String userId = _friend.get_first_user_id_in_ingoing_requests();
-        String userName = _friend.get_first_user_name_in_ingoing_requests();
-        _friend.accept_ingoing_request_with_user_id(userId);
-        _friend.open_page();
-        _friend.search_for(userName);
-        assertThat(userName).isEqualTo(_friend.get_found_friend_name_by_id(userId));
+        User user = _friend.get_first_user_in_ingoing_requests();
+        _friend.accept_user_ingoing_request(user);
+        _friend.search_for(user);
+        assertThat(user.fullName).isEqualTo(_friend.get_found_friend_name_by_id(user.id));
     }
 } 

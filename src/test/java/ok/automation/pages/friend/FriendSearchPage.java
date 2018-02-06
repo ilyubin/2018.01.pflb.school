@@ -5,10 +5,9 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-
-import static ok.automation.pages.friend.FriendPage.hasAnyElementInEndlessBlock;
 
 @DefaultUrl("https://ok.ru")
 public class FriendSearchPage extends PageObject {
@@ -16,17 +15,25 @@ public class FriendSearchPage extends PageObject {
     @FindBy(id = "search")
     private WebElementFacade searchField;
 
-    @FindBy(id = "searchResults")
+    @FindBy(xpath = "//div[starts-with(@id, 'hook_Block_MyFriends')]//div[starts-with(@id, 'hook_Block_MyFriends') and descendant::div[contains(@class, 'ucard-v')]]")
     private WebElementFacade friendsBlock;
 
     @FindBy(css = "#hook_Block_MyFriendsFriendSearchPagingB .gs_result_list > div > .ucard-v")
     private List<WebElementFacade> friendsOnPage;
 
-    @FindBy(id = "hook_Loader_MyFriendsGlobalSearchPagingBLoader")
-    private WebElementFacade usersEndlessBlock;
-
     public void searchFor(String request) {
         searchField.typeAndEnter(request);
+        waitForSearching();
+    }
+
+    public void waitForSearching(){
+        By by = By.cssSelector("div.it_w.search-input.search-input_active");
+        waitFor(ExpectedConditions.not(ExpectedConditions.attributeContains(by, "class", "search-input_searching")));
+    }
+
+    public void waitForLoading(){
+        By by = By.xpath("//div[@id='hook_Block_NavigationProgressBar']//div[@role='progressbar']");
+        waitFor(ExpectedConditions.attributeContains(by, "class", "__complete"));
     }
 
     public int getFriendsOnPageAmount() {
@@ -38,22 +45,7 @@ public class FriendSearchPage extends PageObject {
     }
 
     public String getFriendNameOnPageById(String userId) {
-        return friendsBlock.findElement(By.cssSelector(String.format("a[href*='%s'][data-l*='User_name']", userId))).getText();
-    }
-
-    public String addFirstUserAndGetId() {
-        WebElementFacade futureFriend = usersEndlessBlock.find(By.xpath("//div[@id='hook_Loader_MyFriendsGlobalSearchPagingBLoader']/div/div/div[contains(@class, 'ucard-v') and descendant::span[contains(@class,'button-pro')]]"));
-        futureFriend.find(By.className("button-pro")).click();
-        return futureFriend.find(By.cssSelector("span[data-id]"))
-                .getAttribute("data-id");
-    }
-
-    public boolean hasUsers() {
-        return usersEndlessBlock.containsElements(By.className("ucard-v"));
-    }
-
-    public boolean canAddAnyUserToFriends() {
-        return hasAnyElementInEndlessBlock(withAction(), usersEndlessBlock, By.cssSelector(".ucard-v .button-pro"));
+        return friendsBlock.findElement(By.xpath(String.format("*//div[contains(@class, 'ellip')]/a[contains(@hrefattrs,'%s')]", userId))).getText();
     }
 
 }

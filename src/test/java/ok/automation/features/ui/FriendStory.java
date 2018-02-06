@@ -1,5 +1,6 @@
 package ok.automation.features.ui;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.models.ui.User;
 import ok.automation.steps.FriendSteps;
@@ -36,7 +37,7 @@ public class FriendStory extends BaseFeatureUi {
                 .containsIgnoringCase(user.fullName);
     }
 
-    @Test
+    @Test @Pending
     public void accept_friend_request() {
         User user = _friend.get_first_user_in_ingoing_requests();
         _friend.accept_user_ingoing_request(user);

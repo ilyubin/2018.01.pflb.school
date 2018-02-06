@@ -22,6 +22,7 @@ public class FriendSteps implements ISteps {
 
     @Step
     public void open_page() {
+        friendPage.open();
         friendPage.openPage();
     }
 

@@ -1,8 +1,9 @@
 package ok.automation.features.api;
 
-import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
+import ok.automation.models.api.users.getCallsLeft.UsersGetCallsLeftRequest;
+import ok.automation.models.api.users.getCallsLeft.UsersGetCallsLeftResponse;
 import ok.automation.steps.ApiSteps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,12 @@ public class UsersGetCallsLeftStory {
 
     @Test
     public void get_call_left() {
-        Response response = _api.get_call_left();
-        assertThat(response.statusCode()).isEqualTo(200);
+        UsersGetCallsLeftRequest request = new UsersGetCallsLeftRequest();
+        request.uid = "";
+        request.method = "users.getCallsLeft";
+        request.methods = new String[] {
+            "users.getCallsLeft"
+        };
+        UsersGetCallsLeftResponse response = _api.get_call_left_positive(request);
     }
 }

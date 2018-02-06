@@ -8,6 +8,8 @@ import net.thucydides.core.util.SystemEnvironmentVariables;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;
+import ok.automation.models.api.users.getCallsLeft.UsersGetCallsLeftRequest;
+import ok.automation.models.api.users.getCallsLeft.UsersGetCallsLeftResponse;
 import ok.automation.tech.extensions.HashHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,18 +119,29 @@ public class ApiSteps {
     }
 
     @Step
-    public Response get_call_left() {
-        String request = "https://api.ok.ru/fb.do" +
-                "?application_key=CBAEHQDMEBABABABA" +
-                "&format=json" +
-                "&method=users.getCallsLeft" +
-                "&methods=users.getCallsLeft" +
-                "&sig=ae829b9b24c8a71e18890dc3c58b4a6d" +
-                "&access_token=tkn1gbUo3a4XnEusQuPL7gIiIvYvzg6xtLJV0sPChsOx08jYUT5pshTUQs6pfQyTGVK4e";
-        _log.info("request - | {} |", request);
-        Response response = SerenityRest.get(request);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+    public Response get_call_left(UsersGetCallsLeftRequest request) {
+        String host = _env.getProperty("api.base_url");
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", request.uid);
+        params.put("method", request.method);
+        params.put("methods", mergeElementsForUri(request.methods));
+        Response response = sendGetRequest(params);
+//        String request = host +
+//                "?application_key=CBAEHQDMEBABABABA" +
+//                "&format=json" +
+//                "&method=users.getCallsLeft" +
+//                "&methods=users.getCallsLeft" +
+//                "&sig=ae829b9b24c8a71e18890dc3c58b4a6d" +
+//                "&access_token=tkn1gbUo3a4XnEusQuPL7gIiIvYvzg6xtLJV0sPChsOx08jYUT5pshTUQs6pfQyTGVK4e";
+        assertThat(response.statusCode()).isEqualTo(200);
         return response;
+    }
+
+    @Step
+    public UsersGetCallsLeftResponse get_call_left_positive(UsersGetCallsLeftRequest request) {
+        Response response = get_call_left(request);
+        UsersGetCallsLeftResponse res = response.as(UsersGetCallsLeftResponse.class);
+        return res;
     }
 
     private String mergeElementsForUri(String... elements) {

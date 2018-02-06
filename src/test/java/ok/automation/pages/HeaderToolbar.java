@@ -13,4 +13,8 @@ public class HeaderToolbar extends PageObject {
     private WebElementFacade friendsHeaderButton() {
         return find(By.cssSelector("#hook_Block_HeaderTopFriendsInToolbar a"));
     }
+
+    public void openMessages() {
+        find(By.cssSelector(".toolbar_nav_a__messa [unselectable]")).click();
+    }
 }

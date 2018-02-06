@@ -111,14 +111,32 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <okLogin>${ok.login}</okLogin>
-                        <okPass>${ok.pass}</okPass>
-                        <okName>${ok.name}</okName>
-                        <apiApplicationKey>${apiApplicationKey}</apiApplicationKey>
-                        <apiSessionSecretKey>${apiSessionSecretKey}</apiSessionSecretKey>
-                        <apiAccessToken>${apiAccessToken}</apiAccessToken>
-                    </systemPropertyVariables>
+                    <systemProperties>
+                        <property>
+                            <name>okLogin</name>
+                            <value>${oklogin}</value>
+                        </property>
+                        <property>
+                            <name>okPass</name>
+                            <value>${okpass}</value>
+                        </property>
+                        <property>
+                            <name>okName</name>
+                            <value>${okname}</value>
+                        </property>
+                        <property>
+                            <name>apiApplicationKey</name>
+                            <value>${apiApplicationKey}</value>
+                        </property>
+                        <property>
+                            <name>apiSessionSecretKey</name>
+                            <value>${apiSessionSecretKey}</value>
+                        </property>
+                        <property>
+                            <name>apiAccessToken</name>
+                            <value>${apiAccessToken}</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
             <plugin>

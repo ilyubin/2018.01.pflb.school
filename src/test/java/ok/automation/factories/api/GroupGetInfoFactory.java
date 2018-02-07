@@ -3,6 +3,7 @@ package ok.automation.factories.api;
 import ok.automation.models.api.group.getInfo.GroupGetInfoRequest;
 
 public abstract class GroupGetInfoFactory {
+    public static final String METHOD = "group.getInfo";
     public static final String[] UIDS = {"52462642987098", "57407629951036", "53427798343931"};
     public static final String[] NAMES = {"Гифки", "Рамблер", "ТСВ"};
     public static final boolean MOVE_TO_TOP = false;
@@ -28,10 +29,12 @@ public abstract class GroupGetInfoFactory {
             "TRANSFERS_ALLOWED", "UID", "VIDEO_TAB_HIDDEN", "YEAR_FROM", "YEAR_TO"
     };
 
-    private GroupGetInfoFactory(){}
+    private GroupGetInfoFactory() {
+    }
 
     public static GroupGetInfoRequest withAllFields() {
         GroupGetInfoRequest data = new GroupGetInfoRequest();
+        data.method = METHOD;
         data.uids = UIDS;
         data.move_to_top = MOVE_TO_TOP;
         data.fields = FIELDS;

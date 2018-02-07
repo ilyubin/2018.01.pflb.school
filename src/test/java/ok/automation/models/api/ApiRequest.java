@@ -45,7 +45,7 @@ public class ApiRequest {
         parameters.putIfAbsent("sig", getSig());
         parameters.putIfAbsent("access_token", ACCESS_TOKEN);
 
-        Response response = SerenityRest.rest().formParams(parameters).get(BASE_URL);
+        Response response = SerenityRest.rest().formParams(parameters).log().all().get(BASE_URL);
         _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }

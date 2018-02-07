@@ -156,7 +156,7 @@ public class ApiSteps {
 
     private Response sendGetRequest(Map<String, String> params) {
         String request = getRequestUrl(params);
-        _log.info("request  - | {} |", request);
+        _log.info("request  - | {} | {} |", params.get("method"), request);
         Response response = SerenityRest.get(request);
         _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;

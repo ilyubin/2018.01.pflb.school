@@ -2,7 +2,7 @@ package ok.automation.features.api;
 
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTagValuesOf;
-import ok.automation.factories.GroupGetCountersFactory;
+import ok.automation.factories.api.GroupGetCountersFactory;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;

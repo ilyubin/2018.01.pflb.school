@@ -1,8 +1,9 @@
-package ok.automation.factories;
+package ok.automation.factories.api;
 
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 
-public class GroupGetCountersFactory {
+public abstract class GroupGetCountersFactory {
+    public static final String METHOD = "group.getCounters";
     public static final String GROUP_ID = "54635655856155";
     public static final String[] COUNTER_TYPES = {
             "VIDEOS", "THEMES", "SUGGESTED_TOPICS", "SUGGESTED_PRODUCTS",
@@ -14,6 +15,7 @@ public class GroupGetCountersFactory {
 
     public static GroupGetCountersRequest withAllCounterTypes() {
         GroupGetCountersRequest request = new GroupGetCountersRequest();
+        request.method = METHOD;
         request.groupId = GROUP_ID;
         request.counterTypes = COUNTER_TYPES;
         return request;

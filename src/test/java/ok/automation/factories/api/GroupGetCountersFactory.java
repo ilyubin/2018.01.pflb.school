@@ -2,7 +2,7 @@ package ok.automation.factories.api;
 
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 
-public class GroupGetCountersFactory {
+public abstract class GroupGetCountersFactory {
     public static final String METHOD = "group.getCounters";
     public static final String GROUP_ID = "54635655856155";
     public static final String[] COUNTER_TYPES = {

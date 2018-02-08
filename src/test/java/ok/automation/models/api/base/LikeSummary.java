@@ -3,7 +3,7 @@ package ok.automation.models.api.base;
 public class LikeSummary {
     public Integer count;
     public String[] friend_ids;
-    public Friends[] friends;
+    public Friend[] friends;
     public String impression_id;
     public Long last_like_date_ms;
     public String like_id;

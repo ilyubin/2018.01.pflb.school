@@ -1,5 +1,6 @@
 package ok.automation.models.api.users.getCurrentUser;
 
+import ok.automation.models.api.base.*;
 import ok.automation.tech.extensions.BaseModel;
 
 public class UsersGetCurrentUserResponse extends BaseModel {
@@ -16,13 +17,17 @@ public class UsersGetCurrentUserResponse extends BaseModel {
     public String capabilities;
     public String city_of_birth;
     public Integer common_friends_count;
+    public CurrentLocation current_location;
     public String current_status;
+    public String current_status_date; // TODO orig: Date current_status_date
     public Long current_status_date_ms;
     public String current_status_id;
+    public CurrentStatusMood current_status_mood;
     public String current_status_track_id;
     public String email;
     public Boolean feed_subscription;
     public String first_name;
+    public Boolean forbids_mentioning;
     public Boolean friend;
     public Boolean friend_invitation;
     public String gender;
@@ -30,11 +35,12 @@ public class UsersGetCurrentUserResponse extends BaseModel {
     public Boolean has_phone;
     public Boolean has_service_invisible;
     public Boolean invited_by_friend;
-    public Boolean is_activated;
     public String last_name;
     public String last_online;
     public Long last_online_ms;
     public String locale;
+    public Location location;
+    public Location location_of_birth;
     public String login;
     public String mobile;
     public Long modified_ms;
@@ -63,9 +69,15 @@ public class UsersGetCurrentUserResponse extends BaseModel {
     public String pic_full;
     public String pic_max;
     public Boolean premium;
+    public Present[] presents;
+    public Boolean privatE;// TODO orig: private
     public String ref;
+    public String registered_date; // TODO orig: Date registered_date
     public Long registered_date_ms;
+    public Relation[] relations;
+    public Relationship relationship;
     public Boolean show_lock;
+    public Status status;
     public String uid;
     public String url_chat;
     public String url_chat_mobile;

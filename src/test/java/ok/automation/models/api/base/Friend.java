@@ -1,6 +1,6 @@
 package ok.automation.models.api.base;
 
-public class Friends {
+public class Friend {
     public String reaction;
     public User user;
 }

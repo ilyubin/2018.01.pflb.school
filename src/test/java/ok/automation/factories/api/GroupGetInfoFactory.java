@@ -29,9 +29,6 @@ public abstract class GroupGetInfoFactory {
             "TRANSFERS_ALLOWED", "UID", "VIDEO_TAB_HIDDEN", "YEAR_FROM", "YEAR_TO"
     };
 
-    private GroupGetInfoFactory() {
-    }
-
     public static GroupGetInfoRequest withAllFields() {
         GroupGetInfoRequest data = new GroupGetInfoRequest();
         data.method = METHOD;

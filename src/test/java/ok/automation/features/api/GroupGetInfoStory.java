@@ -16,12 +16,30 @@ public class GroupGetInfoStory extends BaseFeatureApi {
 
     @Test
     @WithTagValuesOf({"read", "smoke", "env:stage"})
-    public void get_group_info_should_be_succes_for_all_uids() {
+    public void get_group_info_should_be_succes_for_all_uids_and_fields() {
         GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
         GroupGetInfoResponse[] r = api.get_group_info_ok(request);
         assertThat(r).extracting("name").containsExactly(GroupGetInfoFactory.NAMES);
         assertThat(r).extracting("access_type").containsOnly("OPEN");
         assertThat(r).extracting("country").containsOnly("Russia", "Moldova");
+    }
+
+    @Test
+    public void get_group_info_should_return_error_if_missing_required_uids() {
+        GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
+        request.uids = null;
+        ErrorResponse r = api.get_group_info_error(request);
+        assertThat(r.error_code).isEqualTo(100);
+        assertThat(r.error_msg).contains("Missing required parameter uids");
+    }
+
+    @Test
+    public void get_group_info_should_return_error_if_empty_uids() {
+        GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
+        request.uids = new String[]{""};
+        ErrorResponse r = api.get_group_info_error(request);
+        assertThat(r.error_code).isEqualTo(100);
+        assertThat(r.error_msg).contains("Missing required parameter uids");
     }
 
     @Test

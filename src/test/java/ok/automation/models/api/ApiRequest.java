@@ -23,34 +23,42 @@ public class ApiRequest {
 
     private Map<String, String> parameters = new TreeMap<>();
 
-    public ApiRequest(){
+    public ApiRequest() {
         parameters.put("application_key", APPLICATION_KEY);
         parameters.put("format", FORMAT);
     }
 
-    public void addParameter(String key, String value){
-        parameters.put(key, value);
+    public void addParameter(String key, String value) {
+        if (value != null) {
+            parameters.put(key, value);
+        }
     }
 
-    public void addParameter(String key, Boolean value){
-        parameters.put(key, value.toString());
+    public void addParameter(String key, Boolean value) {
+        if (value != null) {
+            parameters.put(key, value.toString());
+        }
     }
 
-    public void addParameter(String key, String... value){
-        parameters.put(key, mergeArray(",", value));
+    public void addParameter(String key, String... value) {
+        if (value != null) {
+            parameters.put(key, mergeArray(",", value));
+        }
     }
 
-    public Response send(){
+    public Response send() {
         Map<String, String> parameters = new TreeMap<>(this.parameters);
         parameters.putIfAbsent("sig", getSig());
         parameters.putIfAbsent("access_token", ACCESS_TOKEN);
 
-        Response response = SerenityRest.rest().formParams(parameters).log().all().get(BASE_URL);
+        Response response = SerenityRest.rest().formParams(parameters)
+                //.log().all()
+                .get(BASE_URL);
         _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
         return response;
     }
 
-    private String getSig(){
+    private String getSig() {
         StringBuilder sigSource = new StringBuilder();
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
             sigSource.append(entry.getKey()).append('=').append(entry.getValue());

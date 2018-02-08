@@ -2,7 +2,7 @@ package ok.automation.steps;
 
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
-import ok.automation.models.api.ApiRequest;
+import ok.automation.tech.helpers.ApiRequest;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
 import ok.automation.models.api.group.getCounters.GroupGetCountersResponse;
@@ -34,16 +34,12 @@ public class ApiSteps {
 
     @Step
     public GroupGetCountersResponse get_group_counters_ok(GroupGetCountersRequest request) {
-        Response response = get_group_counters(request);
-        GroupGetCountersResponse r = response.as(GroupGetCountersResponse.class);
-        return r;
+        return get_group_counters(request).as(GroupGetCountersResponse.class);
     }
 
     @Step
     public ErrorResponse get_group_counters_error(GroupGetCountersRequest request) {
-        Response response = get_group_counters(request);
-        ErrorResponse r = response.as(ErrorResponse.class);
-        return r;
+        return get_group_counters(request).as(ErrorResponse.class);
     }
 
     @Step
@@ -60,16 +56,12 @@ public class ApiSteps {
 
     @Step
     public GroupGetInfoResponse[] get_group_info_ok(GroupGetInfoRequest request) {
-        Response response = get_group_info(request);
-        GroupGetInfoResponse[] r = response.as(GroupGetInfoResponse[].class);
-        return r;
+        return get_group_info(request).as(GroupGetInfoResponse[].class);
     }
 
     @Step
     public ErrorResponse get_group_info_error(GroupGetInfoRequest request) {
-        Response response = get_group_info(request);
-        ErrorResponse r = response.as(ErrorResponse.class);
-        return r;
+        return get_group_info(request).as(ErrorResponse.class);
     }
 
     @Step
@@ -85,16 +77,12 @@ public class ApiSteps {
 
     @Step
     public SearchTagMentionsResponse get_tag_mentions_ok(SearchTagMentionsRequest request) {
-        Response response = get_tag_mentions(request);
-        SearchTagMentionsResponse r = response.as(SearchTagMentionsResponse.class);
-        return r;
+        return get_tag_mentions(request).as(SearchTagMentionsResponse.class);
     }
 
     @Step
     public ErrorResponse get_tag_mentions_error(SearchTagMentionsRequest request) {
-        Response response = get_tag_mentions(request);
-        ErrorResponse r = response.as(ErrorResponse.class);
-        return r;
+        return get_tag_mentions(request).as(ErrorResponse.class);
     }
 
     @Step
@@ -103,21 +91,18 @@ public class ApiSteps {
         apiRequest.addParameter("method", request.method);
         apiRequest.addParameter("fields", request.fields);
         Response response = apiRequest.send();
+        assertThat(response.statusCode()).isEqualTo(200);
         return response;
     }
 
     @Step
     public UsersGetCurrentUserResponse get_current_user_ok(UsersGetCurrentUserRequest request) {
-        Response response = get_current_user(request);
-        UsersGetCurrentUserResponse r = response.as(UsersGetCurrentUserResponse.class);
-        return r;
+        return get_current_user(request).as(UsersGetCurrentUserResponse.class);
     }
 
     @Step
     public ErrorResponse get_current_user_error(UsersGetCurrentUserRequest request) {
-        Response response = get_current_user(request);
-        ErrorResponse r = response.as(ErrorResponse.class);
-        return r;
+        return get_current_user(request).as(ErrorResponse.class);
     }
 
 

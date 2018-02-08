@@ -1,19 +1,18 @@
-package ok.automation.models.api;
+package ok.automation.tech.helpers;
 
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import ok.automation.tech.extensions.HashHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public class ApiRequest {
 
-    private static final Logger _log = LoggerFactory.getLogger(ApiRequest.class);
     private static final EnvironmentVariables _env = SystemEnvironmentVariables.createEnvironmentVariables();
     private static final String BASE_URL = _env.getProperty("api.base_url");
     private static final String FORMAT = "json";
@@ -50,11 +49,10 @@ public class ApiRequest {
         Map<String, String> parameters = new TreeMap<>(this.parameters);
         parameters.putIfAbsent("sig", getSig());
         parameters.putIfAbsent("access_token", ACCESS_TOKEN);
-
-        Response response = SerenityRest.rest().formParams(parameters)
-                //.log().all()
-                .get(BASE_URL);
-        _log.info("response - | {} | {} |", response.statusCode(), response.body().asString());
+        Response response = SerenityRest.rest()
+                .filter(new RequestLoggingFilter())
+                .filter(new ResponseLoggingFilter())
+                .formParams(parameters).get(BASE_URL);
         return response;
     }
 

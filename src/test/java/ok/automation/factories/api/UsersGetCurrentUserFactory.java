@@ -29,4 +29,11 @@ public abstract class UsersGetCurrentUserFactory {
         data.fields = FIELDS;
         return data;
     }
+
+    public static UsersGetCurrentUserRequest withFields(String... fields) {
+        UsersGetCurrentUserRequest data = new UsersGetCurrentUserRequest();
+        data.method = METHOD;
+        data.fields = fields;
+        return data;
+    }
 }

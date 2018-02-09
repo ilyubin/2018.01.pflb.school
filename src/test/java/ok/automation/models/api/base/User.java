@@ -1,8 +1,8 @@
 package ok.automation.models.api.base;
 
-import java.util.Date;
+import ok.automation.tech.extensions.BaseModel;
 
-public class User {
+public class User extends BaseModel {
     public Boolean accessible;
     public Integer age;
     public Boolean allows_anonym_access;
@@ -18,7 +18,7 @@ public class User {
     public Integer common_friends_count;
     public CurrentLocation current_location;
     public String current_status;
-    public Date current_status_date;
+    public String current_status_date; // TODO orig: Date current_status_date
     public Long current_status_date_ms;
     public String current_status_id;
     public CurrentStatusMood current_status_mood;
@@ -71,7 +71,7 @@ public class User {
     public Present[] presents;
     public Boolean privatE;// TODO orig: private
     public String ref;
-    public Date registered_date;
+    public String registered_date; // TODO orig: Date registered_date
     public Long registered_date_ms;
     public Relation[] relations;
     public Relationship relationship;

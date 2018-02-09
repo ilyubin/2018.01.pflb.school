@@ -6,6 +6,8 @@ import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.users.getCurrentUser.UsersGetCurrentUserRequest;
 import ok.automation.models.api.users.getCurrentUser.UsersGetCurrentUserResponse;
 import ok.automation.tech.extensions.BaseFeatureApi;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -30,4 +32,15 @@ public class UsersGetCurrentUserStory extends BaseFeatureApi {
         assertThat(r.error_code).isEqualTo(100);
         assertThat(r.error_msg).contains(String.format("Invalid parameter fields value  : [%s]", request.fields[0]));
     }
+
+    @Test
+    @WithTagValuesOf({"read"})
+    public void get_current_user_should_return_correct_age_if_has_birthday() {
+        UsersGetCurrentUserRequest request = UsersGetCurrentUserFactory.withFields("BIRTHDAY", "AGE");
+        UsersGetCurrentUserResponse r = api.get_current_user_ok(request);
+        assertThat(r.birthday).isNotNull().isNotEmpty();
+        assertThat(r.birthdaySet).isTrue();
+        assertThat(r.age).isEqualTo(Years.yearsBetween(DateTime.parse(r.birthday), new DateTime()).getYears());
+    }
+
 }

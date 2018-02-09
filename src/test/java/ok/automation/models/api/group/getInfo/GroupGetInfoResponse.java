@@ -2,8 +2,9 @@ package ok.automation.models.api.group.getInfo;
 
 import ok.automation.models.api.base.Attrs;
 import ok.automation.models.api.base.MainPhoto;
+import ok.automation.tech.extensions.BaseModel;
 
-public class GroupGetInfoResponse {
+public class GroupGetInfoResponse extends BaseModel {
     public String abbreviation;
     public String access_type;
     public String address;

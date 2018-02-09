@@ -45,10 +45,28 @@ public class GroupGetInfoStory extends BaseFeatureApi {
     @Test
     public void get_group_info_should_return_error_if_invalid_uids() {
         GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
-        request.uids = new String[]{String.format("invalidGroupId-%s", UUID.randomUUID())};
+        request.uids = new String[]{String.format("invalidUid-%s", UUID.randomUUID())};
         ErrorResponse r = api.get_group_info_error(request);
         assertThat(r.error_code).isEqualTo(100);
         assertThat(r.error_msg).contains(String.format("Invalid UID value %s", request.uids[0]));
+    }
+
+    @Test
+    public void get_group_info_should_return_error_if_missing_required_fields() {
+        GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
+        request.fields = null;
+        ErrorResponse r = api.get_group_info_error(request);
+        assertThat(r.error_code).isEqualTo(100);
+        assertThat(r.error_msg).contains("Missing required parameter fields");
+    }
+
+    @Test
+    public void get_group_info_should_return_error_if_empty_required_fields() {
+        GroupGetInfoRequest request = GroupGetInfoFactory.withAllFields();
+        request.fields = new String[]{""};
+        ErrorResponse r = api.get_group_info_error(request);
+        assertThat(r.error_code).isEqualTo(100);
+        assertThat(r.error_msg).contains("Missing required parameter fields");
     }
 
     @Test

@@ -2,6 +2,8 @@ package ok.automation.steps;
 
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
+import ok.automation.models.api.group.getUserGroupsByIds.GroupGetUserGroupsByIdsRequest;
+import ok.automation.models.api.group.getUserGroupsByIds.GroupGetUserGroupsByIdsResponse;
 import ok.automation.tech.helpers.ApiRequest;
 import ok.automation.models.api.errors.ErrorResponse;
 import ok.automation.models.api.group.getCounters.GroupGetCountersRequest;
@@ -105,5 +107,24 @@ public class ApiSteps {
         return get_current_user(request).as(ErrorResponse.class);
     }
 
+    @Step
+    public Response get_user_groups_by_ids(GroupGetUserGroupsByIdsRequest request) {
+        ApiRequest apiRequest = new ApiRequest();
+        apiRequest.addParameter("method", request.method);
+        apiRequest.addParameter("group_id", request.group_id);
+        apiRequest.addParameter("uids", request.uids);
+        Response response = apiRequest.send();
+        assertThat(response.statusCode()).isEqualTo(200);
+        return response;
+    }
 
+    @Step
+    public GroupGetUserGroupsByIdsResponse[] get_user_groups_by_ids_ok(GroupGetUserGroupsByIdsRequest request) {
+        return get_user_groups_by_ids(request).as(GroupGetUserGroupsByIdsResponse[].class);
+    }
+
+    @Step
+    public ErrorResponse get_user_groups_by_ids_error(GroupGetUserGroupsByIdsRequest request) {
+        return get_user_groups_by_ids(request).as(ErrorResponse.class);
+    }
 }

@@ -153,6 +153,11 @@
                     <systemPropertyVariables>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
                     </systemPropertyVariables>
+
+                    <parallel>classes</parallel>
+                    <threadCount>2</threadCount>
+                    <perCoreThreadCount>true</perCoreThreadCount>
+
                 </configuration>
                 <executions>
                     <execution>

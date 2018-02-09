@@ -5,7 +5,6 @@ import ok.automation.pages.HeaderToolbar;
 import ok.automation.pages.MainPage;
 import ok.automation.pages.MessagesPage;
 import ok.automation.tech.interfaces.ISteps;
-import org.openqa.selenium.By;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -24,24 +23,19 @@ public class MessageSteps implements ISteps {
 
     @Step
     public void create_message(String friend, String text) {
-        findFriend(friend);
-        send_message(text);
-    }
-
-    @Step
-    private void send_message(String text) {
+        messagesPage.findFriend(friend);
         messagesPage.typeMessage(text);
         messagesPage.submitMessage();
     }
 
     @Step
-    private void findFriend(String friend) {
-        messagesPage.findFriend(friend);
+    public String get_last_message() {
+        return messagesPage.getLastMessage();
     }
 
     @Step
     public void changeMessage(String friend,String message) {
-        findFriend(friend);
+        messagesPage.findFriend(friend);
         messagesPage.changeMessage(message);
     }
 

@@ -20,12 +20,12 @@ import static net.thucydides.core.annotations.ClearCookiesPolicy.Never;
 @RunWith(SerenityRunner.class)
 public class BaseFeatureUi {
 
-    @Managed(clearCookies=Never)
+//    @Managed(clearCookies=Never)
+    @Managed
     public WebDriver webdriver;
 
     protected String okLogin = System.getProperty("okLogin");
     protected String okPass = System.getProperty("okPass");
-    protected String okName = System.getProperty("okName");
 
     protected Faker fake = new Faker();
 
@@ -36,11 +36,13 @@ public class BaseFeatureUi {
 
     @Before
     public void setUp() {
-        webdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        if (_setUpIsDone)
-            return;
         _user.open_login_page();
         _user.loginToOkRu(okLogin, okPass);
-        _setUpIsDone = true;
+//        webdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//        if (_setUpIsDone)
+//            return;
+//        _user.open_login_page();
+//        _user.loginToOkRu(okLogin, okPass);
+//        _setUpIsDone = true;
     }
 }

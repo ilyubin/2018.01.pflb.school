@@ -4,7 +4,6 @@ import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import ok.automation.steps.MessageSteps;
 import ok.automation.tech.extensions.BaseFeatureUi;
-import ok.automation.steps.GiftSteps;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MessageStory extends BaseFeatureUi {
 
+    public static final String FRIEND = "Влад Зинченко";
     @Steps
     private MessageSteps _message;
 
@@ -22,16 +22,15 @@ public class MessageStory extends BaseFeatureUi {
 
     @Test
     public void send_message_to_friend() {
-        String friend = "John McClain";
         String text = fake.lorem().sentence(7);
-        _message.create_message(friend, text);
+        _message.create_message(FRIEND, text);
+        assertThat(_message.get_last_message()).isEqualTo(text);
     }
 
-    @Test
+    @Test @Pending
     public void edit_message() {
-        String friend = "John McClain";
-        String message=fake.lorem().sentence(7);
-        _message.changeMessage(friend,message);
+        String message = fake.lorem().sentence(7);
+        _message.changeMessage(FRIEND, message);
         assertThat(_message.readMessage()).isEqualTo(message);
     }
 

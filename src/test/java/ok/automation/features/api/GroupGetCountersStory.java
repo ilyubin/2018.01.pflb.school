@@ -41,4 +41,14 @@ public class GroupGetCountersStory extends BaseFeatureApi {
         assertThat(r.error_code).isEqualTo(100);
         assertThat(r.error_msg).contains(String.format("Invalid parameter counterTypes value  : [%s]", request.counterTypes[0]));
     }
+
+    @Test
+    public void get_group_counters_should_return_error_if_no_counter_type() {
+        GroupGetCountersRequest request = new GroupGetCountersRequest();
+        request.groupId = "INVALID";;
+        request.counterTypes = new String[]{"THEMES"};
+        ErrorResponse r = api.get_group_counters_error(request);
+        assertThat(r.error_code).isEqualTo(160);
+        assertThat(r.error_msg).contains(String.format("Invalid group_id [%s]", request.groupId));
+    }
 }
